@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Lenscape Company Ltd | Creative Agency</title>
+  <meta name="description"
+    content="A full-service creative agency delivering high-impact branding, content, and digital solutions." />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <!-- The Atmosphere Layer -->
+  <div class="noise-overlay"></div>
+  <div class="custom-cursor"></div>
+
+  <!-- Wait State Loader -->
+  <div id="loader">
+    <div class="data-text">SYSTEM_INIT // LOADING ASSETS...</div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="navbar">
+    <div class="logo drama-text">LNSCP.</div>
+    <div class="nav-links data-text">
+      <a href="#services">[01] ARTIFACTS</a>
+      <a href="#about">[02] PHILOSOPHY</a>
+      <a href="#contact">[03] THE PROTOCOL</a>
+    </div>
+  </nav>
+
+  <!-- 1. The Opening Shot (Hero) -->
+  <section id="hero-scroll" class="hero-scroll-container">
+    <div class="hero-sticky">
+      <canvas id="hero-canvas"></canvas>
+
+      <div class="hero-overlay main-hero">
+        <div class="telemetry-feed data-text">
+          <span>[SYSTEM] PROTOCOL: LNSCP-01</span>
+          <span>LOCATION: SANTA CRUZ, TT</span>
+          <span class="timestamp" id="hero-time"></span>
+        </div>
+        <h1 class="drama-text split-text">Your Vision.<br>Perfectly<br>Captured.</h1>
+        <p class="hero-subtext">The Lenscape Company Ltd. A Multi-Faceted Creative Hub.</p>
+        <div class="scroll-indicator data-text">↓ INITIATE SCROLL</div>
+      </div>
+
+      <!-- Basic Package Overlay -->
+      <div class="package-overlay basic-package" id="basic-package">
+        <div class="package-content">
+          <div class="data-text package-label">// SYSTEM_LEVEL_01</div>
+          <h2 class="drama-text">BASIC PACKAGE</h2>
+          <div class="package-grid">
+            <div class="pricing">
+              <ul class="data-text">
+                <li>2HRS: $3250</li>
+                <li>3HRS: $3750</li>
+                <li>4HRS: $4250</li>
+                <li>5HRS: $4750</li>
+                <li>TRANSPORT: $250</li>
+              </ul>
+            </div>
+            <div class="includes">
+              <div class="data-text label">INCLUDES:</div>
+              <ul>
+                <li>Booth</li>
+                <li>(3) Presets [arm pathways]</li>
+                <li>(2) Operators</li>
+                <li>Digital sharing (Airdrop, email, QR code, SMS)</li>
+                <li>Props (if required)</li>
+                <li>2-light set up (fill light)</li>
+                <li>Unlimited videos</li>
+                <li>Custom Overlay</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glam Package Overlay -->
+      <div class="package-overlay glam-package" id="glam-package">
+        <div class="package-content">
+          <div class="data-text package-label">// SYSTEM_LEVEL_02</div>
+          <h2 class="drama-text">GLAM PACKAGE</h2>
+          <div class="package-grid">
+            <div class="pricing">
+              <ul class="data-text">
+                <li>2HRS: $4250</li>
+                <li>3HRS: $4750</li>
+                <li>4HRS: $5250</li>
+                <li>5HRS: $5750</li>
+                <li>TRANSPORT: $250</li>
+              </ul>
+            </div>
+            <div class="includes">
+              <div class="data-text label">INCLUDES:</div>
+              <ul>
+                <li>Booth</li>
+                <li>(5) Presets [arm pathways]</li>
+                <li>(2) Operators</li>
+                <li>Digital sharing (Airdrop, email, QR code, SMS)</li>
+                <li>Props (if required)</li>
+                <li>Complete Lighting set up (2 fill light; backlight & spot light)</li>
+                <li>Unlimited videos</li>
+                <li>Custom Overlay</li>
+                <li>(4-6) Stanchions</li>
+                <li>(3) Camera Effects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. The Philosophy (About) - Asymmetrical Layout -->
+  <section id="about" class="philosophy-section">
+    <div class="philosophy-grid">
+      <div class="phil-col left">
+        <h2 class="drama-text section-title">We don't just<br>create content.</h2>
+        <div class="data-text subsection-marker">// THE PHILOSOPHY</div>
+      </div>
+      <div class="phil-col right">
+        <p class="large-body">We create experiences that elevate your brand. As a boutique agency, our agility allows us
+          to adapt quickly within the ever-changing creative landscape—while always keeping YOU first.</p>
+        <ul class="differentiators">
+          <li>
+            <span class="data-text">[A]</span>
+            <div class="desc">
+              <strong>Storytelling.</strong>
+              <p>Strong storytelling builds stronger brands.</p>
+            </div>
+          </li>
+          <li>
+            <span class="data-text">[B]</span>
+            <div class="desc">
+              <strong>Experience.</strong>
+              <p>Over 15 years across events, branding, and tech.</p>
+            </div>
+          </li>
+          <li>
+            <span class="data-text">[C]</span>
+            <div class="desc">
+              <strong>Innovation.</strong>
+              <p>Integrating AI, data, and emerging tech.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The Artifact Gallery (Features/Services) -->
+  <section id="services" class="artifacts-section">
+    <div class="section-header">
+      <h2 class="drama-text section-title">Endless Capabilities.</h2>
+      <p class="data-text">SEAMLESS_EXECUTION // 03.ARTIFACTS</p>
+    </div>
+
+    <!-- The Diagnostic Shuffler container -->
+    <div class="artifact-gallery">
+      <!-- Artifact 1 -->
+      <div class="artifact-card" data-index="1">
+        <div class="card-inner">
+          <div class="card-header data-text">SYS.01 // BRANDING</div>
+          <h3 class="drama-text">Design & Identity</h3>
+          <p>Corporate, Food & Beverage, Logos, and Signage. Transform ideas into powerful visual stories.</p>
+          <div class="card-footer data-text hover-target">VIEW PROTOCOL →</div>
+        </div>
+      </div>
+
+      <!-- Artifact 2 -->
+      <div class="artifact-card" data-index="2">
+        <div class="card-inner">
+          <div class="card-header data-text">SYS.02 // DIGITAL</div>
+          <h3 class="drama-text">Web & Media</h3>
+          <p>Web Design & Development, Media Management, PPL & Analytics. Measure performance and optimize for ROI.</p>
+          <div class="card-footer data-text hover-target">VIEW PROTOCOL →</div>
+        </div>
+      </div>
+
+      <!-- Artifact 3 -->
+      <div class="artifact-card highlight-card" data-index="3">
+        <div class="card-inner">
+          <div class="card-header data-text">SYS.03 // HIGHLIGHT</div>
+          <h3 class="drama-text">MotionMagic Camera</h3>
+          <p>An interactive video booth for activations and events. Instant social-media ready content and data
+            collection.</p>
+          <div class="card-footer data-text hover-target">VIEW PROTOCOL →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trusted By Section -->
+  <section class="trusted-section">
+    <div class="data-text text-center">TRUSTED_BY // LEADING BRANDS</div>
+    <div class="marquee-container">
+      <div class="marquee-track drama-text">
+        <span>Popeyes</span> <span class="dot">•</span>
+        <span>Burger King</span> <span class="dot">•</span>
+        <span>VISA</span> <span class="dot">•</span>
+        <span>RudeBoy</span> <span class="dot">•</span>
+        <span>Caribbean Bottlers</span> <span class="dot">•</span>
+        <span>Hilton</span> <span class="dot">•</span>
+        <span>UWI</span> <span class="dot">•</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. The Primary Protocol (Contact) -->
+  <section id="contact" class="contact-section">
+    <div class="contact-container">
+      <h2 class="drama-text massive-cta hover-target">Get In<br>Touch.</h2>
+
+      <div class="contact-grid data-text">
+        <div class="contact-item">
+          <div class="label">// LOCATION</div>
+          <div>Santa Cruz,<br>Trinidad</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">// COMM</div>
+          <div><a href="tel:8684925870" class="hover-target">868-492-5870</a></div>
+          <div><a href="tel:8687052977" class="hover-target">868-705-2977</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="label">// NETWORK</div>
+          <div><a href="https://www.lenscapecompany.com" target="_blank" class="hover-target">lenscapecompany.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-legal data-text">
+      © 2026 THE LENSCAPE COMPANY LTD. ALL SYSTEMS OPERATIONAL.
+    </div>
+  </section>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
