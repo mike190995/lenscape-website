@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | The Lenscape Company Ltd</title>
+  <meta name="description" content="Get in touch with The Lenscape Company Ltd. Start a project, ask a question, or get a quote for branding, digital, or MotionMagic Cam services." />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="custom-cursor"></div>
+
+  <div id="loader">
+    <div class="data-text" style="margin-bottom:1.5rem; opacity:0.5; letter-spacing:0.25em;">SYSTEM_INIT // CONTACT</div>
+    <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="navbar">
+    <a href="/" class="logo">LNSCP<span>.</span></a>
+    <div class="nav-links">
+      <a href="/#services">[01] SERVICES</a>
+      <a href="/portfolio.html">[02] PORTFOLIO</a>
+      <a href="/motionmagic.html">[03] MOTIONMAGIC</a>
+      <a href="/contact.html" class="active">[04] CONTACT</a>
+      <button class="btn-nav-book book-now-btn hover-target">BOOK NOW</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="contact-page-hero">
+    <div class="section-label">GET IN TOUCH</div>
+    <h1 class="drama-text" style="font-size: clamp(4rem, 10vw, 10rem); line-height: 0.88; margin-top: 1.5rem; margin-bottom: 2rem;">
+      Let's Build<br>Something<br><span style="color: var(--accent);">Together.</span>
+    </h1>
+    <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.85; max-width: 42ch; margin-top: 2rem;">
+      Whether it's a brand refresh, a new digital presence, or booking the MotionMagic Cam for your next event —
+      we want to hear from you.
+    </p>
+  </section>
+
+  <!-- Contact Grid -->
+  <div class="contact-page-grid">
+
+    <!-- Form -->
+    <div class="contact-form-wrap">
+      <div class="contact-form-title">Send a Message</div>
+      <div class="contact-form-subtitle">// WE RESPOND WITHIN 24 HOURS</div>
+
+      <form class="contact-form" id="contact-form" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-name">Your Name *</label>
+            <input class="form-input" type="text" id="cf-name" name="name"
+              placeholder="Full name" required autocomplete="name" />
+            <div class="field-error" id="err-cf-name">Please enter your name.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-email">Email Address *</label>
+            <input class="form-input" type="email" id="cf-email" name="email"
+              placeholder="your@email.com" required autocomplete="email" />
+            <div class="field-error" id="err-cf-email">Please enter a valid email.</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-phone">Phone Number</label>
+            <input class="form-input" type="tel" id="cf-phone" name="phone"
+              placeholder="868-XXX-XXXX" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-subject">Subject *</label>
+            <select class="form-select" id="cf-subject" name="subject" required>
+              <option value="" disabled selected>What's this about?</option>
+              <option value="Branding & Identity">Branding &amp; Identity</option>
+              <option value="Web & Digital">Web &amp; Digital</option>
+              <option value="MotionMagic Cam Booking">MotionMagic Cam Booking</option>
+              <option value="Media Management">Media Management</option>
+              <option value="General Enquiry">General Enquiry</option>
+              <option value="Partnership">Partnership / Collaboration</option>
+            </select>
+            <div class="field-error" id="err-cf-subject">Please select a subject.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cf-budget">Estimated Budget (optional)</label>
+          <select class="form-select" id="cf-budget" name="budget">
+            <option value="" disabled selected>Select a range</option>
+            <option value="Under $5,000 TTD">Under $5,000 TTD</option>
+            <option value="$5,000 – $15,000 TTD">$5,000 – $15,000 TTD</option>
+            <option value="$15,000 – $30,000 TTD">$15,000 – $30,000 TTD</option>
+            <option value="$30,000+ TTD">$30,000+ TTD</option>
+            <option value="Let's discuss">Let's discuss</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cf-message">Message *</label>
+          <textarea class="form-textarea" id="cf-message" name="message"
+            placeholder="Tell us about your project, event, or idea..." required
+            style="min-height: 160px;"></textarea>
+          <div class="field-error" id="err-cf-message">Please write a message.</div>
+        </div>
+
+        <div class="contact-submit-wrap">
+          <button type="submit" class="btn-primary hover-target" id="cf-submit">
+            <span>SEND MESSAGE →</span>
+          </button>
+          <div class="contact-form-status" id="cf-status"></div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="contact-info-panel">
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">// LOCATION</div>
+        <div class="contact-info-item">
+          Santa Cruz,<br>Trinidad &amp; Tobago,<br>West Indies
+        </div>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">// REACH US</div>
+        <div class="contact-info-item">
+          <a href="tel:8684925870" class="hover-target">868-492-5870</a><br>
+          <a href="tel:8687052977" class="hover-target">868-705-2977</a><br>
+          <a href="https://www.lenscapecompany.com" target="_blank" rel="noopener"
+            class="hover-target">lenscapecompany.com</a>
+        </div>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">// HOURS</div>
+        <div class="contact-info-item" style="font-size: 0.9rem;">
+          Mon – Fri: 8:00am – 6:00pm<br>
+          Sat: 9:00am – 3:00pm<br>
+          <span style="color: var(--text-muted); opacity: 0.6; font-size: 0.82rem;">Sun &amp; Public Holidays: Closed</span>
+        </div>
+      </div>
+
+      <div class="contact-map-block">
+        <div class="section-label" style="margin-bottom: 0;">COORDINATES</div>
+        <div class="map-coords">
+          <span>LAT</span> 10.6818° N<br>
+          <span>LNG</span> 61.3967° W<br>
+          <span>REF</span> Santa Cruz Valley, TT
+        </div>
+        <a href="https://maps.google.com/?q=Santa+Cruz+Trinidad" target="_blank" rel="noopener"
+          class="btn-ghost hover-target" style="font-size: 0.6rem; padding: 0.75rem 1.5rem;">
+          OPEN IN MAPS →
+        </a>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">// FOLLOW US</div>
+        <div class="social-links">
+          <a href="#" class="social-link hover-target" target="_blank" rel="noopener">
+            <span class="social-link-icon">IG</span>
+            @lenscapecompany
+          </a>
+          <a href="#" class="social-link hover-target" target="_blank" rel="noopener">
+            <span class="social-link-icon">FB</span>
+            The Lenscape Company
+          </a>
+          <a href="#" class="social-link hover-target" target="_blank" rel="noopener">
+            <span class="social-link-icon">TT</span>
+            @lenscape_tt
+          </a>
+          <a href="#" class="social-link hover-target" target="_blank" rel="noopener">
+            <span class="social-link-icon">LI</span>
+            The Lenscape Company Ltd
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <a href="/" class="logo">LNSCP<span>.</span></a>
+    <div class="footer-legal">© 2026 THE LENSCAPE COMPANY LTD.</div>
+    <div class="data-text" style="opacity:0.35; font-size:0.58rem;">CONTACT // SYS.04</div>
+  </footer>
+
+  <script type="module" src="/contact.js"></script>
+</body>
+</html>
