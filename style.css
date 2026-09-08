@@ -186,14 +186,37 @@ h1, h2, h3, h4,
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-drama);
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  text-decoration: none;
 }
 
 .logo span { color: var(--accent); }
+
+.logo-img {
+  width: 135px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 2px;
+  transition: opacity 0.3s var(--ease-cinematic), transform 0.3s var(--ease-cinematic);
+}
+
+.logo:hover .logo-img {
+  opacity: 0.88;
+  transform: scale(1.02);
+}
+
+.site-footer .logo-img {
+  width: 100px;
+  height: auto;
+}
 
 .nav-links {
   display: flex;
@@ -1621,6 +1644,7 @@ h1, h2, h3, h4,
 @media (max-width: 768px) {
   :root { --page-padding: 1.5rem; --section-gap: 6rem; }
   .navbar { padding: 1.5rem var(--page-padding); }
+  .logo-img { width: 115px; }
   .nav-links a:not(.btn-nav-book) { display: none; }
   .home-hero h1 { font-size: clamp(3.5rem, 15vw, 8rem); }
   .section-title { font-size: clamp(2.5rem, 10vw, 5rem); }
