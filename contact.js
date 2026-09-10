@@ -8,8 +8,20 @@ import Lenis from '@studio-freight/lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
+import './mobile-nav.js'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const isEventLabs = window.location.pathname.includes('/eventlabs') || document.body.classList.contains('eventlabs')
+if (isEventLabs) {
+  document.body.classList.add('eventlabs')
+  document.documentElement.style.setProperty('--accent', '#CFDC3B')
+  document.documentElement.style.setProperty('--accent-dim', 'rgba(207, 220, 59, 0.15)')
+  document.documentElement.style.setProperty('--accent-glow', 'rgba(207, 220, 59, 0.35)')
+  document.documentElement.style.setProperty('--accent-secondary', '#36B1D3')
+  document.documentElement.style.setProperty('--accent-cyan', '#36B1D3')
+  document.documentElement.style.setProperty('--accent-magenta', '#D32C87')
+}
 
 // ============================================================
 // CONFIG — same Google Apps Script endpoint pattern

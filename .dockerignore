@@ -1,4 +1,4 @@
-node_modules
+﻿node_modules
 dist
 .git
 .gitignore
@@ -7,3 +7,4 @@ README.md
 .vscode
 npm-debug.log
 error.log
+raw-media-archive

@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+raw-media-archive/
 
 # Editor directories and files
 .vscode/*

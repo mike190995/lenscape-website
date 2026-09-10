@@ -29,7 +29,74 @@
       <a href="/contact.html" class="active">[04] CONTACT</a>
       <button class="btn-nav-book book-now-btn hover-target">BOOK NOW</button>
     </div>
+    <div class="nav-mobile-actions">
+      <button class="btn-nav-book-mobile book-now-btn">BOOK</button>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="toggle-icon">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </span>
+        <span class="toggle-label">MENU</span>
+      </button>
+    </div>
   </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Menu">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <span class="data-text mobile-sys-tag">[SYS.NAV // PORTAL 01]</span>
+      </div>
+      <button class="mobile-nav-close" aria-label="Close Navigation Menu">✕</button>
+    </div>
+    
+    <div class="mobile-nav-content">
+      <nav class="mobile-nav-links">
+        <a href="/#services" class="mobile-nav-item">
+          <span class="mobile-nav-idx">01</span>
+          <span class="mobile-nav-text">SERVICES</span>
+        </a>
+        <a href="/portfolio.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">02</span>
+          <span class="mobile-nav-text">PORTFOLIO</span>
+        </a>
+        <a href="/motionmagic.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">03</span>
+          <span class="mobile-nav-text">MOTIONMAGIC</span>
+        </a>
+        <a href="/contact.html" class="mobile-nav-item active">
+          <span class="mobile-nav-idx">04</span>
+          <span class="mobile-nav-text">CONTACT</span>
+        </a>
+      </nav>
+
+      <div class="mobile-drawer-cta">
+        <button class="btn-primary mobile-drawer-book book-now-btn">
+          <span>BOOK PRODUCTION NOW →</span>
+        </button>
+      </div>
+
+      <div class="mobile-drawer-portal">
+        <div class="mobile-portal-label">[ REGIONAL ENTITY ]</div>
+        <a href="/eventlabs/contact.html" class="mobile-portal-link">
+          <div class="mobile-portal-left">
+            <span class="portal-dot"></span>
+            <span class="mobile-portal-name">EVENT LABS GUYANA</span>
+          </div>
+          <span class="mobile-portal-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-footer">
+        <div class="mobile-footer-meta">
+          <div>TRINIDAD &amp; TOBAGO</div>
+          <a href="tel:+1868777LENS">+1 868-777-LENS</a>
+        </div>
+        <div class="mobile-footer-status">ONLINE // 2026</div>
+      </div>
+    </div>
+  </aside>
 
   <!-- Hero -->
   <section class="contact-page-hero">

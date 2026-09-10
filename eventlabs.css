@@ -1,0 +1,715 @@
+/* ============================================================
+   EVENT LABS GUYANA — DESIGN SYSTEM & THEME
+   Sub-Agent A: Design & UI Architect
+   Sister Entity to The Lenscape Company Ltd
+   Brand Identity & Color Spectrum:
+     - Citron Lime:     #CFDC3B (Primary Brand Anchor)
+     - Electric Cyan:   #36B1D3 (Secondary Energy / Telemetry)
+     - Vibrant Magenta: #D32C87 (Accent Punch / Creative Spark)
+     - Deep Noir:       #080907 (Subtle Olive Undertone)
+   ============================================================ */
+
+@import "./style.css";
+
+/* ============================================================
+   EVENT LABS ROOT DESIGN TOKENS
+   ============================================================ */
+:root,
+body.eventlabs,
+.eventlabs {
+  color-scheme: dark;
+
+  /* Primary Brand Anchor: Citron Lime */
+  --accent:              #CFDC3B !important;
+  --accent-dim:          rgba(207, 220, 59, 0.15) !important;
+  --accent-glow:         rgba(207, 220, 59, 0.35) !important;
+  --accent-solid-rgb:    207, 220, 59 !important;
+
+  /* Secondary Energy: Electric Cyan */
+  --accent-secondary:    #36B1D3 !important;
+  --accent-cyan:         #36B1D3 !important;
+  --accent-cyan-dim:     rgba(54, 177, 211, 0.15) !important;
+  --accent-cyan-glow:    rgba(54, 177, 211, 0.35) !important;
+  --accent-cyan-rgb:     54, 177, 211 !important;
+
+  /* Accent Punch: Vibrant Magenta */
+  --accent-magenta:      #D32C87 !important;
+  --accent-magenta-dim:  rgba(211, 44, 135, 0.15) !important;
+  --accent-magenta-glow: rgba(211, 44, 135, 0.35) !important;
+  --accent-magenta-rgb:  211, 44, 135 !important;
+
+  /* Background Palette: Deep noir with subtle olive undertone */
+  --bg-color:            #080907 !important;
+  --bg-secondary:        #0D0F0C !important;
+  --bg-card:             rgba(207, 220, 59, 0.025) !important;
+  --bg-card-hover:       rgba(54, 177, 211, 0.05) !important;
+
+  /* Component Border Accents */
+  --border-subtle:       rgba(207, 220, 59, 0.15) !important;
+  --border-cyan:         rgba(54, 177, 211, 0.3) !important;
+  --border-magenta:      rgba(211, 44, 135, 0.3) !important;
+
+  /* Cross-Portal Accent (Lenscape Trinidad Yellow) */
+  --accent-tt:           #F2C41A;
+  --accent-tt-glow:      rgba(242, 196, 26, 0.3);
+}
+
+/* ============================================================
+   BRUTALIST SHARP GEOMETRY ENFORCEMENT
+   Strict 0px border-radius across all interactive components
+   ============================================================ */
+body.eventlabs,
+.eventlabs-theme,
+.eventlabs-theme *,
+body.eventlabs * {
+  border-radius: 0 !important;
+}
+
+/* Base Body Override */
+body.eventlabs,
+.eventlabs-theme {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+/* Selection Highlight */
+::selection {
+  background: var(--accent);
+  color: #080907;
+}
+
+/* ============================================================
+   SINGLE & DUAL-ACCENT TEXT UTILITIES
+   ============================================================ */
+.lime-text,
+.text-lime {
+  color: var(--accent) !important;
+}
+
+.cyan-text,
+.text-cyan {
+  color: var(--accent-secondary) !important;
+}
+
+.magenta-text,
+.text-magenta {
+  color: var(--accent-magenta) !important;
+}
+
+/* Glow Text Utilities */
+.glow-lime {
+  text-shadow: 0 0 16px rgba(207, 220, 59, 0.45);
+}
+
+.glow-cyan {
+  text-shadow: 0 0 16px rgba(54, 177, 211, 0.5);
+}
+
+.glow-magenta {
+  text-shadow: 0 0 16px rgba(211, 44, 135, 0.5);
+}
+
+/* Dual-Accent Gradient Text Overlays */
+.text-gradient-lime-cyan,
+.gradient-lime-cyan {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.text-gradient-cyan-magenta,
+.gradient-cyan-magenta {
+  background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.text-gradient-lime-magenta,
+.gradient-lime-magenta {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Tri-Color Dynamic Ribbon Gradient */
+.text-gradient-tri {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 50%, var(--accent-magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ============================================================
+   SPECIALIZED GUYANA TELEMETRY STYLING
+   [SYSTEM] PROTOCOL: EVNTLB-GY-01 | LOCATION: GEORGETOWN, GY
+   ============================================================ */
+.telemetry-gy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-family: var(--font-data);
+  text-transform: uppercase;
+}
+
+.telemetry-gy .protocol-line,
+.protocol-gy {
+  font-family: var(--font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.telemetry-gy .location-line,
+.location-gy {
+  font-family: var(--font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+.telemetry-gy .coords-gy {
+  font-size: 0.56rem;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  opacity: 0.65;
+}
+
+.telemetry-badge-gy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(54, 177, 211, 0.08);
+  border: 1px solid var(--border-cyan);
+  font-family: var(--font-data);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: var(--accent-secondary);
+}
+
+.beacon-dot-gy {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-secondary);
+  box-shadow: 0 0 10px var(--accent-secondary);
+  animation: portal-pulse 2s infinite ease-in-out;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.beacon-dot-lime {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  animation: portal-pulse 2s infinite ease-in-out;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.beacon-dot-magenta {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-magenta);
+  box-shadow: 0 0 10px var(--accent-magenta);
+  animation: portal-pulse 2s infinite ease-in-out;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   EVENT LABS BUTTONS & CALL-TO-ACTIONS
+   Sharp brutalist cuts, high-energy glow transitions
+   ============================================================ */
+.btn-primary {
+  background: var(--accent);
+  color: #080907;
+  border: none;
+  font-family: var(--font-drama);
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.35s var(--ease-cinematic);
+}
+
+.btn-primary:hover {
+  background: var(--accent-secondary);
+  color: #080907;
+  box-shadow: 0 0 30px var(--accent-cyan-glow);
+}
+
+/* Cyan Button Variant */
+.btn-cyan {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.5rem;
+  background: var(--accent-secondary);
+  color: #080907;
+  font-family: var(--font-drama);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-cinematic);
+}
+
+.btn-cyan:hover {
+  background: var(--accent);
+  box-shadow: 0 0 30px var(--accent-glow);
+  color: #080907;
+}
+
+/* Magenta Button Variant */
+.btn-magenta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.5rem;
+  background: var(--accent-magenta);
+  color: #FFFFFF;
+  font-family: var(--font-drama);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-cinematic);
+}
+
+.btn-magenta:hover {
+  background: var(--accent-secondary);
+  color: #080907;
+  box-shadow: 0 0 30px var(--accent-cyan-glow);
+}
+
+/* Brutalist Outlined Buttons */
+.btn-outline-lime {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 2.25rem;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-cinematic);
+  text-decoration: none;
+}
+
+.btn-outline-lime:hover {
+  background: var(--accent-dim);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.btn-outline-cyan {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 2.25rem;
+  background: transparent;
+  color: var(--accent-secondary);
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent-secondary);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-cinematic);
+  text-decoration: none;
+}
+
+.btn-outline-cyan:hover {
+  background: var(--accent-cyan-dim);
+  box-shadow: 0 0 20px var(--accent-cyan-glow);
+}
+
+.btn-outline-magenta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 2.25rem;
+  background: transparent;
+  color: var(--accent-magenta);
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent-magenta);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-cinematic);
+  text-decoration: none;
+}
+
+.btn-outline-magenta:hover {
+  background: var(--accent-magenta-dim);
+  box-shadow: 0 0 20px var(--accent-magenta-glow);
+}
+
+/* Nav Book Button in Event Labs */
+.btn-nav-book {
+  background: var(--accent);
+  color: #080907 !important;
+}
+
+.btn-nav-book:hover {
+  background: var(--accent-secondary);
+  box-shadow: 0 0 18px var(--accent-cyan-glow);
+}
+
+/* ============================================================
+   SECTION LABELS & HERO ACCENTS
+   ============================================================ */
+.section-label {
+  color: var(--accent);
+}
+
+.section-label::before {
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+}
+
+.home-hero h1 em {
+  color: var(--accent);
+}
+
+.scroll-cue-line {
+  background: linear-gradient(to bottom, var(--accent), var(--accent-secondary), transparent);
+}
+
+/* ============================================================
+   BENTO CARDS & BOOTH CARDS (EVENT LABS OVERRIDES)
+   ============================================================ */
+.bento-card,
+.booth-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  transition: border-color 0.4s var(--ease-cinematic), box-shadow 0.4s var(--ease-cinematic);
+}
+
+.bento-card:hover,
+.booth-card:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 35px var(--accent-cyan-dim);
+}
+
+.bento-card.card-lime:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 35px var(--accent-dim);
+}
+
+.bento-card.card-magenta:hover {
+  border-color: var(--accent-magenta);
+  box-shadow: 0 0 35px var(--accent-magenta-dim);
+}
+
+/* ============================================================
+   EVENT LABS PORTAL SWITCHER BADGES
+   Allow toggling between Trinidad & Guyana portals
+   ============================================================ */
+.portal-badge.to-tt {
+  border-color: rgba(242, 196, 26, 0.25);
+}
+
+.portal-badge.to-tt:hover {
+  border-color: var(--accent-tt);
+  box-shadow: 0 0 24px var(--accent-tt-glow);
+}
+
+.portal-badge.to-tt .portal-dot-tt {
+  background-color: var(--accent-tt);
+  box-shadow: 0 0 8px var(--accent-tt);
+}
+
+.portal-badge.to-tt:hover .portal-label {
+  color: var(--accent-tt);
+}
+
+.portal-badge.to-gy {
+  border-color: rgba(54, 177, 211, 0.25);
+}
+
+.portal-badge.to-gy:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 24px var(--accent-cyan-glow);
+}
+
+.portal-badge.to-gy .portal-dot {
+  background-color: var(--accent-secondary);
+  box-shadow: 0 0 8px var(--accent-secondary);
+}
+
+.portal-badge.to-gy:hover .portal-label {
+  color: var(--accent-secondary);
+}
+
+/* ============================================================
+   CYBER-TELEMETRY BORDER BOX
+   Brutalist decorative container for Event Labs data blocks
+   ============================================================ */
+.eventlabs-box {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(13, 15, 12, 0.85);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.eventlabs-box::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+.eventlabs-box::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid var(--accent-secondary);
+  border-right: 2px solid var(--accent-secondary);
+}
+
+/* ============================================================
+   EVENT LABS COMPREHENSIVE BRAND PALETTE OVERRIDES
+   Ensures all buttons, tabs, tiers, badges, and forms use Citron Lime & Cyan
+   ============================================================ */
+
+/* All primary action buttons */
+body.eventlabs .btn-primary,
+body.eventlabs .btn-nav-book,
+body.eventlabs .book-now-btn,
+body.eventlabs .btn-submit,
+body.eventlabs a.btn-primary,
+body.eventlabs button.btn-primary,
+body.eventlabs .hero-cta .btn-primary {
+  background: #CFDC3B !important;
+  background-color: #CFDC3B !important;
+  color: #080907 !important;
+  border: 1px solid #CFDC3B !important;
+  transition: all 0.3s ease !important;
+}
+
+body.eventlabs .btn-primary:hover,
+body.eventlabs .btn-nav-book:hover,
+body.eventlabs .book-now-btn:hover,
+body.eventlabs .btn-submit:hover,
+body.eventlabs a.btn-primary:hover,
+body.eventlabs button.btn-primary:hover,
+body.eventlabs .hero-cta .btn-primary:hover {
+  background: #36B1D3 !important;
+  background-color: #36B1D3 !important;
+  color: #080907 !important;
+  border-color: #36B1D3 !important;
+  box-shadow: 0 0 25px rgba(54, 177, 211, 0.45) !important;
+}
+
+body.eventlabs .btn-primary span,
+body.eventlabs .btn-nav-book span,
+body.eventlabs .book-now-btn span {
+  color: #080907 !important;
+}
+
+/* Secondary ghost buttons */
+body.eventlabs .btn-ghost,
+body.eventlabs a.btn-ghost,
+body.eventlabs button.btn-ghost {
+  border-color: rgba(207, 220, 59, 0.4) !important;
+  color: #FFFFFF !important;
+}
+
+body.eventlabs .btn-ghost:hover,
+body.eventlabs a.btn-ghost:hover,
+body.eventlabs button.btn-ghost:hover {
+  border-color: #36B1D3 !important;
+  color: #36B1D3 !important;
+  box-shadow: 0 0 20px rgba(54, 177, 211, 0.35) !important;
+}
+
+/* Portfolio filter tabs */
+body.eventlabs .filter-tab {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: var(--text-muted) !important;
+}
+
+body.eventlabs .filter-tab:hover {
+  border-color: #36B1D3 !important;
+  color: #36B1D3 !important;
+}
+
+body.eventlabs .filter-tab.active {
+  background: #CFDC3B !important;
+  background-color: #CFDC3B !important;
+  color: #080907 !important;
+  border-color: #CFDC3B !important;
+  box-shadow: 0 0 16px rgba(207, 220, 59, 0.35) !important;
+  font-weight: 700 !important;
+}
+
+/* MotionMagic Tiers & Showcase */
+body.eventlabs .tier-card.featured {
+  border-color: #CFDC3B !important;
+  box-shadow: 0 0 35px rgba(207, 220, 59, 0.18) !important;
+  background: rgba(207, 220, 59, 0.03) !important;
+}
+
+body.eventlabs .badge-featured {
+  background: #CFDC3B !important;
+  color: #080907 !important;
+}
+
+body.eventlabs .faq-question:hover {
+  color: #CFDC3B !important;
+}
+
+body.eventlabs .faq-item.active .faq-question {
+  color: #36B1D3 !important;
+}
+
+/* Contact Page Inputs & Links */
+body.eventlabs .form-control:focus,
+body.eventlabs input:focus,
+body.eventlabs select:focus,
+body.eventlabs textarea:focus {
+  border-color: #36B1D3 !important;
+  box-shadow: 0 0 14px rgba(54, 177, 211, 0.3) !important;
+}
+
+body.eventlabs .contact-info a:hover,
+body.eventlabs .social-link:hover {
+  color: #36B1D3 !important;
+}
+
+/* Badges, Labels, Loaders, Cursors */
+body.eventlabs .section-label {
+  color: #CFDC3B !important;
+}
+
+body.eventlabs .section-label::before {
+  background: linear-gradient(90deg, #CFDC3B, #36B1D3) !important;
+}
+
+body.eventlabs .item-badge,
+body.eventlabs .hero-badge {
+  color: #CFDC3B !important;
+}
+
+body.eventlabs #loader .loader-bar-fill {
+  background: #CFDC3B !important;
+  box-shadow: 0 0 16px #CFDC3B !important;
+}
+
+body.eventlabs .custom-cursor.active {
+  background: #36B1D3 !important;
+  box-shadow: 0 0 15px #36B1D3 !important;
+}
+
+/* Brand pattern tinting */
+body.eventlabs .brand-pattern-img {
+  filter: hue-rotate(22deg) saturate(1.5) brightness(0.95);
+}
+
+/* Booking Modal in Event Labs */
+body.eventlabs .booking-modal-content {
+  border-color: rgba(207, 220, 59, 0.25) !important;
+}
+
+body.eventlabs .booking-submit-btn {
+  background: #CFDC3B !important;
+  color: #080907 !important;
+  border-color: #CFDC3B !important;
+}
+
+body.eventlabs .booking-submit-btn:hover {
+  background: #36B1D3 !important;
+  color: #080907 !important;
+  box-shadow: 0 0 25px rgba(54, 177, 211, 0.45) !important;
+}
+
+/* Event Labs Navbar — Matches Lenscape dimensions exactly */
+body.eventlabs .navbar .logo-img {
+  height: 35px !important;
+  width: auto !important;
+  max-height: 35px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* ============================================================
+   EVENT LABS MOBILE NAVIGATION & RESPONSIVE OVERRIDES
+   ============================================================ */
+@media (max-width: 768px) {
+  body.eventlabs .navbar .logo-img {
+    height: 28px !important;
+    width: auto !important;
+    max-height: 28px !important;
+  }
+}
+
+body.eventlabs .btn-nav-book-mobile {
+  background: #CFDC3B !important;
+  color: #080907 !important;
+  border-color: #CFDC3B !important;
+}
+
+body.eventlabs .btn-nav-book-mobile:hover {
+  background: #36B1D3 !important;
+  border-color: #36B1D3 !important;
+}
+
+body.eventlabs .mobile-sys-tag {
+  color: #CFDC3B !important;
+}
+
+body.eventlabs .mobile-nav-idx {
+  color: #36B1D3 !important;
+}
+
+body.eventlabs .mobile-nav-item:hover .mobile-nav-text,
+body.eventlabs .mobile-nav-item.active .mobile-nav-text {
+  color: #CFDC3B !important;
+}
+
+body.eventlabs .mobile-drawer-book {
+  background: #CFDC3B !important;
+  color: #080907 !important;
+  border-color: #CFDC3B !important;
+}
+
+body.eventlabs .mobile-drawer-book:hover {
+  background: #36B1D3 !important;
+  color: #080907 !important;
+  box-shadow: 0 0 20px rgba(54, 177, 211, 0.4) !important;
+}
+
+body.eventlabs .mobile-portal-dot {
+  background: #F2C41A !important;
+  box-shadow: 0 0 8px #F2C41A !important;
+}
+
+body.eventlabs .mobile-portal-link:hover {
+  color: #F2C41A !important;
+}
+
+

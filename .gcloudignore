@@ -1,0 +1,9 @@
+﻿.gcloudignore
+.git
+.gitignore
+node_modules/
+dist/
+.vscode/
+npm-debug.log
+error.log
+raw-media-archive/

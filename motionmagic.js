@@ -8,8 +8,20 @@ import Lenis from '@studio-freight/lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
+import './mobile-nav.js'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const isEventLabs = window.location.pathname.includes('/eventlabs') || document.body.classList.contains('eventlabs')
+if (isEventLabs) {
+  document.body.classList.add('eventlabs')
+  document.documentElement.style.setProperty('--accent', '#CFDC3B')
+  document.documentElement.style.setProperty('--accent-dim', 'rgba(207, 220, 59, 0.15)')
+  document.documentElement.style.setProperty('--accent-glow', 'rgba(207, 220, 59, 0.35)')
+  document.documentElement.style.setProperty('--accent-secondary', '#36B1D3')
+  document.documentElement.style.setProperty('--accent-cyan', '#36B1D3')
+  document.documentElement.style.setProperty('--accent-magenta', '#D32C87')
+}
 
 // --- Image Sequence Setup ---
 const frameCount = 177
@@ -68,15 +80,21 @@ function initInteractions() {
   context.imageSmoothingEnabled  = true
   context.imageSmoothingQuality  = 'high'
 
+  const getIsMobile = () => window.innerWidth <= 768;
+
   const airship = {
     frame: 0,
-    x:     window.innerWidth * 0.15,
-    y:     window.innerHeight * 0.15
+    x:     getIsMobile() ? 0 : window.innerWidth * 0.15,
+    y:     getIsMobile() ? 0 : window.innerHeight * 0.15
   }
 
   function resizeCanvas() {
     canvas.width  = window.innerWidth  * window.devicePixelRatio
     canvas.height = window.innerHeight * window.devicePixelRatio
+    if (airship.frame === 0) {
+      airship.x = getIsMobile() ? 0 : window.innerWidth * 0.15
+      airship.y = getIsMobile() ? 0 : window.innerHeight * 0.15
+    }
     render()
   }
 
@@ -85,7 +103,7 @@ function initInteractions() {
 
   function render() {
     if (!images[airship.frame]) return
-    const img         = images[airship.frame]
+    const img          = images[airship.frame]
     const canvasAspect = canvas.width  / canvas.height
     const imgAspect    = img.width     / img.height
     let drawWidth, drawHeight, offsetX, offsetY
@@ -96,10 +114,14 @@ function initInteractions() {
       offsetX    = 0
       offsetY    = (canvas.height - drawHeight) / 2
     } else {
-      drawHeight = canvas.height
-      drawWidth  = canvas.height * imgAspect
+      const isMobile = getIsMobile()
+      // On mobile portrait, scale comfortably so the full robotic arm & camera head are framed
+      const scaleMultiplier = isMobile ? 0.90 : 1.0
+      drawHeight = canvas.height * scaleMultiplier
+      drawWidth  = drawHeight * imgAspect
       offsetX    = (canvas.width  - drawWidth)  / 2
-      offsetY    = 0
+      // On mobile portrait, position slightly lower so the top camera head clears the mobile navbar with breathing room
+      offsetY    = isMobile ? (canvas.height - drawHeight) * 0.65 : 0
     }
 
     context.clearRect(0, 0, canvas.width, canvas.height)

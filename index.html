@@ -36,7 +36,74 @@
       <a href="/contact.html">[04] CONTACT</a>
       <button class="btn-nav-book book-now-btn hover-target">BOOK NOW</button>
     </div>
+    <div class="nav-mobile-actions">
+      <button class="btn-nav-book-mobile book-now-btn">BOOK</button>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="toggle-icon">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </span>
+        <span class="toggle-label">MENU</span>
+      </button>
+    </div>
   </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Menu">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <span class="data-text mobile-sys-tag">[SYS.NAV // PORTAL 01]</span>
+      </div>
+      <button class="mobile-nav-close" aria-label="Close Navigation Menu">✕</button>
+    </div>
+    
+    <div class="mobile-nav-content">
+      <nav class="mobile-nav-links">
+        <a href="#services" class="mobile-nav-item">
+          <span class="mobile-nav-idx">01</span>
+          <span class="mobile-nav-text">SERVICES</span>
+        </a>
+        <a href="/portfolio.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">02</span>
+          <span class="mobile-nav-text">PORTFOLIO</span>
+        </a>
+        <a href="/motionmagic.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">03</span>
+          <span class="mobile-nav-text">MOTIONMAGIC</span>
+        </a>
+        <a href="/contact.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">04</span>
+          <span class="mobile-nav-text">CONTACT</span>
+        </a>
+      </nav>
+
+      <div class="mobile-drawer-cta">
+        <button class="btn-primary mobile-drawer-book book-now-btn">
+          <span>BOOK PRODUCTION NOW →</span>
+        </button>
+      </div>
+
+      <div class="mobile-drawer-portal">
+        <div class="mobile-portal-label">[ REGIONAL ENTITY ]</div>
+        <a href="/eventlabs/" class="mobile-portal-link">
+          <div class="mobile-portal-left">
+            <span class="portal-dot"></span>
+            <span class="mobile-portal-name">EVENT LABS GUYANA</span>
+          </div>
+          <span class="mobile-portal-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-footer">
+        <div class="mobile-footer-meta">
+          <div>TRINIDAD &amp; TOBAGO</div>
+          <a href="tel:+1868777LENS">+1 868-777-LENS</a>
+        </div>
+        <div class="mobile-footer-status">ONLINE // 2026</div>
+      </div>
+    </div>
+  </aside>
 
   <!-- ============================================================
        HERO
@@ -46,7 +113,7 @@
 
     <div class="home-hero-overlay">
       <div class="home-hero-text">
-        <div class="section-label" style="margin-bottom:2.5rem; opacity:0;">
+        <div class="section-label" style="display:none;">
           <span>THE LENSCAPE COMPANY LTD — TRINIDAD & TOBAGO</span>
         </div>
 
@@ -71,7 +138,7 @@
           <a href="/motionmagic.html" class="btn-ghost hover-target">VIEW MOTIONMAGIC</a>
         </div>
 
-        <div class="hero-telemetry" style="margin-top: 4.5rem; text-align: left; align-items: flex-start;">
+        <div class="hero-telemetry">
           <div class="data-text" style="margin-bottom:0.5rem;">[SYSTEM] PROTOCOL: LNSCP-01</div>
           <div class="data-text">LOCATION: SANTA CRUZ, TT</div>
           <div class="data-text" id="hero-time"></div>
@@ -79,8 +146,14 @@
         </div>
       </div>
 
-      <div class="hero-logo-wrap">
-        <img src="/Company%20Logo/LENSCAPE.png" alt="The Lenscape Company Ltd" class="hero-logo-img" />
+      <div class="hero-logo-wrap hero-portal-wrap">
+        <a href="/eventlabs/" class="hero-logo-link hover-target" aria-label="Visit Event Labs Guyana Portal">
+          <img src="/Company%20Logo/Lenscape%20Guyana/Event%20Lab%20Logo%201.png" alt="Event Labs Guyana" class="hero-logo-img portal-logo-img" />
+          <div class="hero-portal-hover-tag">
+            <span class="portal-dot"></span>
+            <span class="portal-hover-label">EVENT LABS GUYANA →</span>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -106,39 +179,189 @@
       </p>
     </div>
 
-    <div class="services-grid">
+    <!-- BENTO GRID (4-COLUMN RESPONSIVE ARCHITECTURE) -->
+    <div class="bento-grid">
 
-      <!-- Card 1: Branding -->
-      <div class="service-card reveal-up">
-        <div class="service-card-num">SYS.01 // BRANDING</div>
-        <div class="service-card-icon">◈</div>
-        <h3 class="drama-text">Design &amp;<br>Identity</h3>
-        <p>Corporate, Food &amp; Beverage, Logos, and Signage. Transform ideas into powerful visual stories that command
-          attention and build loyalty.</p>
-        <a href="/portfolio.html?filter=branding" class="service-card-link hover-target">VIEW BRANDING →</a>
+      <!-- CARD 1: Content Production (2x2 - Cinema Lens Pull & Video Zoom) -->
+      <div class="bento-card bento-card-2x2 bento-card-1 trigger-flow-a reveal-up" data-modal-service="photo-video" tabindex="0" role="button" aria-label="Content Production - Launch Overlay">
+        <div class="bento-card-bg-wrap">
+          <video class="bento-video-bg" loop muted playsinline poster="/Portfolio/thumbnails/Videos/BK%20-%20Thi_King%20Sandwich%20-%20Horizontal.webp">
+            <source src="/Portfolio/Our%20Work/Videos/BK%20-%20Thi_King%20Sandwich%20-%20Horizontal.mp4" type="video/mp4" />
+          </video>
+          <img src="/Portfolio/thumbnails/Videos/BK%20-%20Thi_King%20Sandwich%20-%20Horizontal.webp" alt="Content Production, Video & Speed Reels" class="bento-fallback-img" />
+          <div class="lens-blur-overlay"></div>
+          <div class="card-gradient-vignette"></div>
+        </div>
+        <div class="bento-card-content">
+          <div class="bento-tag">[SYS.01] // CONTENT PRODUCTION</div>
+          <h3 class="drama-text bento-title">Photography, Video &amp;<br><span class="accent-text">SPEED Reels.</span></h3>
+          <p class="bento-desc">Full-scale commercial production, high-velocity reel editing, and cinematic visual assets engineered for immediate engagement.</p>
+          <div class="bento-action-link">
+            <span>LAUNCH OVERLAY</span>
+            <span class="arrow-icon">→</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Card 2: Digital -->
-      <div class="service-card reveal-up" style="transition-delay:0.12s;">
-        <div class="service-card-num">SYS.02 // DIGITAL</div>
-        <div class="service-card-icon">◇</div>
-        <h3 class="drama-text">Web &amp;<br>Media</h3>
-        <p>Web Design &amp; Development, Media Management, PPL &amp; Analytics. Measure performance and continuously
-          optimize for ROI.</p>
-        <a href="/portfolio.html?filter=digital" class="service-card-link hover-target">VIEW DIGITAL WORK →</a>
+      <!-- CARD 2: The Booth Suite (1x2 - Camera Flash Strobe) -->
+      <div class="bento-card bento-card-1x2 bento-card-2 trigger-flow-a reveal-up" data-modal-service="booth-suite" style="transition-delay:0.1s;" tabindex="0" role="button" aria-label="The Booth Suite - Launch Overlay">
+        <div class="bento-card-bg-wrap">
+          <video class="bento-video-bg bento-img-bg" loop muted playsinline poster="/Portfolio/thumbnails/Videos/MMC%20videos/Ex_1.webp">
+            <source src="/Portfolio/Our%20Work/Videos/MMC%20videos/Ex_1.mp4" type="video/mp4" />
+          </video>
+          <img src="/Portfolio/thumbnails/Videos/MMC%20videos/Ex_1.webp" alt="MotionMagic Cam Booth Suite 360" class="bento-fallback-img" />
+          <div class="strobe-overlay"></div>
+          <div class="card-gradient-vignette"></div>
+        </div>
+        <div class="bento-card-content">
+          <div class="bento-tag">[SYS.02] // EXPERIENTIAL</div>
+          <h3 class="drama-text bento-title">The Booth<br>Suite.</h3>
+          <p class="bento-desc">MotionMagic Cam 360° activations, instant video delivery, and custom event overlays.</p>
+          <div class="bento-action-link">
+            <span>BOOK BOOTH</span>
+            <span class="arrow-icon">→</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Card 3: MotionMagic (Highlight) -->
-      <div class="service-card highlight-service reveal-up" style="transition-delay:0.24s;">
-        <div class="service-card-num">SYS.03 // HIGHLIGHT</div>
-        <div class="service-card-icon" style="opacity:0.9;">⬡</div>
-        <h3 class="drama-text">MotionMagic<br>Cam</h3>
-        <p>The interactive 360° video booth for activations and events. Instant social-ready content, data collection,
-          and unforgettable moments.</p>
-        <a href="/portfolio.html?filter=motionmagic" class="service-card-link hover-target">VIEW ACTIVATIONS →</a>
+      <!-- CARD 3: Strategic Branding (1x2 - SVG Line Drawing & Brand Graphics) -->
+      <div class="bento-card bento-card-1x2 bento-card-3 trigger-flow-b reveal-up" style="transition-delay:0.2s;" tabindex="0" role="button" aria-label="Strategic Branding - View Portfolio">
+        <div class="bento-card-bg-wrap dark-bg">
+          <img src="/Portfolio/thumbnails/Ads/FLYER.webp" alt="Strategic Branding & Packaging" class="branding-bg-img" />
+          <svg class="bento-svg-signature" viewBox="0 0 200 120" fill="none" stroke="var(--accent)" stroke-width="2">
+            <path d="M 20 60 C 50 10, 80 110, 110 60 C 140 10, 170 110, 190 60 L 195 65" />
+          </svg>
+          <div class="card-gradient-vignette"></div>
+        </div>
+        <div class="bento-card-content">
+          <div class="bento-tag">[SYS.03] // BRANDING</div>
+          <h3 class="drama-text bento-title">Strategic<br>Branding.</h3>
+          <blockquote class="bento-quote">"Strong storytelling builds stronger brands."</blockquote>
+          <p class="bento-desc">Corporate identity systems, typography &amp; packaging design.</p>
+          <div class="bento-action-link">
+            <span>EXPLORE PORTFOLIO</span>
+            <span class="arrow-icon">↓</span>
+          </div>
+        </div>
       </div>
 
-    </div><!-- /services-grid -->
+      <!-- CARD 4: Digital Solutions (2x1 - 3D Parallax Tilt) -->
+      <div class="bento-card bento-card-2x1 bento-card-4 trigger-flow-c reveal-up" style="transition-delay:0.3s;" tabindex="0" role="button" aria-label="Digital Solutions - Open Scoper">
+        <div class="bento-card-bg-wrap parallax-container">
+          <div class="parallax-code-bg">
+            <code>&lt;sys:stack status="200" lcp="0.8s" /&gt;</code>
+          </div>
+          <div class="parallax-charts">
+            <div class="chart-bar" style="height:40%; left:10%;"></div>
+            <div class="chart-bar" style="height:70%; left:30%;"></div>
+            <div class="chart-bar" style="height:55%; left:50%;"></div>
+            <div class="chart-bar" style="height:90%; left:70%;"></div>
+          </div>
+          <div class="parallax-frame">
+            <div class="frame-dot"></div>
+            <div class="frame-dot"></div>
+            <div class="frame-dot"></div>
+            <span class="frame-title">analytics.lenscape.io</span>
+          </div>
+          <div class="card-gradient-vignette"></div>
+        </div>
+        <div class="bento-card-content">
+          <div class="bento-tag">[SYS.04] // DIGITAL SOLUTIONS</div>
+          <h3 class="drama-text bento-title">Web &amp; Technical Integration</h3>
+          <p class="bento-desc">Performance tracking, web development &amp; conversion optimization.</p>
+          <div class="bento-action-link">
+            <span>SOLUTION DRAWER</span>
+            <span class="arrow-icon">→</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5: Custom Interactive Games (2x1 - Puzzle Tile Cascade) -->
+      <div class="bento-card bento-card-2x1 bento-card-5 trigger-flow-c reveal-up" style="transition-delay:0.4s;" tabindex="0" role="button" aria-label="Interactive Games - Open Scoper">
+        <div class="bento-card-bg-wrap">
+          <div class="puzzle-grid">
+            <div class="puzzle-tile">CONNECT 3</div>
+            <div class="puzzle-tile highlight">MATCH 2 ⚡</div>
+            <div class="puzzle-tile">WIN PRIZES 🏆</div>
+            <div class="puzzle-tile">ENGAGE 🎮</div>
+          </div>
+          <div class="card-gradient-vignette"></div>
+        </div>
+        <div class="bento-card-content">
+          <div class="bento-tag">[SYS.05] // GAMIFIED ENGAGEMENT</div>
+          <h3 class="drama-text bento-title">Interactive Engagement Games</h3>
+          <p class="bento-desc">Custom Connect 3, Match 2 &amp; gamified promotional tools.</p>
+          <div class="bento-action-link">
+            <span>SOLUTION DRAWER</span>
+            <span class="arrow-icon">→</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /bento-grid -->
+  </section>
+
+  <!-- ============================================================
+       PORTFOLIO SHOWCASE ANCHOR (FLOW B TARGET)
+       ============================================================ -->
+  <section id="portfolio-showcase" class="showcase-section">
+    <div class="showcase-header">
+      <div>
+        <div class="section-label">[FLOW B] // PORTFOLIO SHOWCASE</div>
+        <h2 class="drama-text section-title">Curated<br>Work.</h2>
+      </div>
+      <div class="portfolio-filters" id="portfolio-showcase-filters">
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">ALL</button>
+          <button class="filter-tab" data-filter="event">EVENT</button>
+          <button class="filter-tab" data-filter="commercial">COMMERCIAL</button>
+          <button class="filter-tab" data-filter="motionmagic">BOOTH</button>
+          <button class="filter-tab" data-filter="branding">BRANDING</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="showcase-grid" id="portfolio-showcase-grid">
+      <!-- 1: Shell Gala -->
+      <a href="/portfolio.html?project=shell-gala-2025" class="showcase-item hover-target" data-category="event motionmagic" style="text-decoration:none; color:inherit; display:block;">
+        <img src="/Portfolio/thumbnails/Photo%20Albums/SHELL%20Black%20&%20White%20Gala%202025/untitled-12.webp" alt="Shell Black & White Gala" loading="lazy" />
+        <div class="showcase-info">
+          <div class="showcase-cat">EVENT &amp; EXPERIENTIAL</div>
+          <div class="showcase-title">Shell Trinidad — Black &amp; White Gala</div>
+        </div>
+      </a>
+
+      <!-- 2: Burger King Commercial -->
+      <a href="/portfolio.html?project=bk-thi-king-horizontal" class="showcase-item hover-target" data-category="commercial" style="text-decoration:none; color:inherit; display:block;">
+        <img src="/Portfolio/thumbnails/Videos/BK%20-%20Thi_King%20Sandwich%20-%20Horizontal.webp" alt="Burger King Thi-King Commercial" loading="lazy" />
+        <div class="showcase-info">
+          <div class="showcase-cat">COMMERCIAL &amp; BROADCAST</div>
+          <div class="showcase-title">Burger King — "Thi-King" Campaign Spot</div>
+        </div>
+      </a>
+
+      <!-- 3: Coca-Cola ICC World Cup -->
+      <a href="/portfolio.html?project=coca-cola-world-cup" class="showcase-item hover-target" data-category="event" style="text-decoration:none; color:inherit; display:block;">
+        <img src="/Portfolio/thumbnails/Photo%20Albums/Coca%20Cola%20ICC%20World%20Cup%202024/DSC00016.webp" alt="Coca-Cola ICC World Cup" loading="lazy" />
+        <div class="showcase-info">
+          <div class="showcase-cat">EVENT ACTIVATION</div>
+          <div class="showcase-title">Coca-Cola — ICC Men's T20 World Cup</div>
+        </div>
+      </a>
+
+      <!-- 4: LIQLIQUORS Retail Launch -->
+      <a href="/portfolio.html?project=liqliquors-retail-launch" class="showcase-item hover-target" data-category="branding" style="text-decoration:none; color:inherit; display:block;">
+        <img src="/Portfolio/thumbnails/Ads/FLYER.webp" alt="LIQLIQUORS Retail Launch" loading="lazy" />
+        <div class="showcase-info">
+          <div class="showcase-cat">BRANDING &amp; PRINT</div>
+          <div class="showcase-title">LIQLIQUORS — Retail Launch Campaign</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="text-align: center; margin-top: 3.5rem;">
+      <a href="/portfolio.html" class="btn-primary hover-target"><span>EXPLORE ALL 37 PORTFOLIO WORKS →</span></a>
+    </div>
   </section>
 
   <!-- BRAND PATTERN BREAK -->
@@ -249,6 +472,219 @@
       © 2026 THE LENSCAPE COMPANY LTD. ALL SYSTEMS OPERATIONAL.
     </div>
   </section>
+
+  <!-- ============================================================
+       FLOW A: HIGH-VALUE CLIENT OVERLAY (VIDEO SHOWREEL & BOOKING API)
+       ============================================================ -->
+  <div class="overlay-container" id="high-value-overlay" role="dialog" aria-modal="true" aria-label="Capabilities Showreel" data-lenis-prevent>
+    <div class="overlay-window" data-lenis-prevent>
+      <button class="overlay-close" id="overlay-close-btn" aria-label="Close Overlay">✕</button>
+
+      <!-- Video / Photo Showreel Header with Media Switcher -->
+      <div class="overlay-media">
+        <video id="overlay-showreel-video" loop muted playsinline poster="/Portfolio/thumbnails/Videos/BK%20-%20Thi_King%20Sandwich%20-%20Horizontal.webp">
+          <source src="/Portfolio/Our%20Work/Videos/BK%20-%20Thi_King%20Sandwich%20-%20Horizontal.mp4" type="video/mp4" />
+        </video>
+        <img id="overlay-showreel-img" alt="Showreel Media" style="display:none;" />
+        
+        <div class="overlay-media-badge" id="overlay-media-badge">[LIVE DEMO] // HIGH-VALUE CAPABILITIES</div>
+        
+        <div class="overlay-media-controls">
+          <div class="overlay-media-tabs" id="overlay-media-tabs"></div>
+          <button class="overlay-mute-btn" id="overlay-mute-btn">UNMUTE 🔊</button>
+        </div>
+      </div>
+
+      <!-- Capability Value Propositions -->
+      <div class="overlay-body">
+        <div class="overlay-tag" id="overlay-tag">// ACCELERATED PRODUCTION &amp; ON-SITE DELIVERY</div>
+        <h2 class="drama-text overlay-title" id="overlay-title">Zero Infrastructure Lag.<br><span class="accent-text">Maximum Impact.</span></h2>
+        
+        <div class="overlay-grid-copy">
+          <div class="overlay-copy-col">
+            <div class="overlay-num" id="overlay-col1-num">[01]</div>
+            <h4 id="overlay-col1-title">Instant Turnaround</h4>
+            <p id="overlay-col1-text">On-site color grading, live 360° rendering, and immediate QR delivery to event guests within 15 seconds.</p>
+          </div>
+          <div class="overlay-copy-col">
+            <div class="overlay-num" id="overlay-col2-num">[02]</div>
+            <h4 id="overlay-col2-title">Cinematic Quality</h4>
+            <p id="overlay-col2-text">Bespoke arm choreography, multi-angle lighting, and 4K ultra-smooth high-frame-rate capture.</p>
+          </div>
+        </div>
+
+        <!-- Conversion Point: Primary Booking Trigger -->
+        <div class="overlay-cta-box">
+          <button class="cta-primary-booking" id="overlay-booking-trigger">
+            <span id="overlay-booking-cta-text">INSTANT CALENDAR BOOKING →</span>
+          </button>
+          <span class="overlay-cta-subtext">Direct calendar API synchronization · 24h confirmation guarantee</span>
+        </div>
+
+        <!-- Embedded Native Booking Calendar Panel -->
+        <div class="overlay-booking-panel" id="overlay-booking-panel">
+          <div class="flowa-booking-header">
+            <h3 id="flowa-cal-heading">Select Date &amp; Details</h3>
+            <div class="flowa-selected-date" id="flowa-selected-date">— Click a date below</div>
+          </div>
+
+          <div id="flowa-booking-form-wrap">
+            <div class="flowa-cal-nav">
+              <button id="flowa-cal-prev">‹</button>
+              <div id="flowa-month-label"></div>
+              <button id="flowa-cal-next">›</button>
+            </div>
+            
+            <div class="flowa-cal-grid" id="flowa-calendar-grid"></div>
+
+            <div class="flowa-form-fields">
+              <div class="flowa-field-row">
+                <input type="text" id="flowa-name" placeholder="Your Name *" required />
+                <input type="text" id="flowa-event" placeholder="Event Name *" required />
+              </div>
+              <div class="flowa-field-row">
+                <select id="flowa-location" required>
+                  <option value="" disabled selected>Select Location *</option>
+                  <option value="Port of Spain, Trinidad">Port of Spain</option>
+                  <option value="San Fernando, Trinidad">San Fernando</option>
+                  <option value="Chaguanas, Trinidad">Chaguanas</option>
+                  <option value="Santa Cruz, Trinidad">Santa Cruz</option>
+                  <option value="Scarborough, Tobago">Tobago</option>
+                </select>
+                <div class="flowa-time-inputs">
+                  <input type="time" id="flowa-start-time" value="18:00" required />
+                  <span>TO</span>
+                  <input type="time" id="flowa-end-time" value="21:00" required />
+                </div>
+              </div>
+              <button class="btn-primary flowa-submit-btn" id="flowa-submit-booking">
+                <span>CONFIRM BOOKING SLOT →</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flowa-success" id="flowa-booking-success" style="display:none;">
+            <h4>✓ Booking Slot Confirmed</h4>
+            <p>Your request has been placed in the priority queue. Our event team will review and confirm availability within 24 hours.</p>
+            <div class="flowa-ref" id="flowa-ref-code">// REF: LSC-000000</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FLOW C: DIGITAL PARTNER SLIDE-OUT SOLUTION DRAWER
+       ============================================================ -->
+  <div class="drawer-backdrop" id="drawer-backdrop" data-lenis-prevent></div>
+  <aside class="slide-out-drawer" id="slide-out-drawer" aria-label="Digital Partner Solutions Drawer" data-lenis-prevent>
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-subtitle">// DIGITAL PARTNER SOLUTION DRAWER</div>
+        <h3 class="drama-text drawer-title">Data Over Opinions.</h3>
+      </div>
+      <button class="drawer-close" id="drawer-close-btn" aria-label="Close Drawer">✕</button>
+    </div>
+
+    <div class="drawer-content">
+      <!-- "Data Over Opinions" Framework Diagram -->
+      <div class="framework-card">
+        <h4>The Performance Framework</h4>
+        <p>Continuous measurement, algorithmic optimization, and full-funnel digital ROI.</p>
+        
+        <div class="framework-steps">
+          <div class="step-box">
+            <div class="step-num">01</div>
+            <div class="step-title">Track</div>
+            <div class="step-desc">Custom pixel setup &amp; event telemetry</div>
+          </div>
+          <div class="step-box">
+            <div class="step-num">02</div>
+            <div class="step-title">Analyze</div>
+            <div class="step-desc">Algorithmic behavior &amp; ROI reporting</div>
+          </div>
+          <div class="step-box">
+            <div class="step-num">03</div>
+            <div class="step-title">Scale</div>
+            <div class="step-desc">Iterative campaign &amp; UX optimization</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Project Scoper Form -->
+      <div class="scoper-box">
+        <h4>Interactive Project Builder</h4>
+        <p>Select your required capabilities to build a initial scope:</p>
+
+        <form id="project-scoper-form">
+          <div class="scoper-checkboxes">
+            <label class="scoper-check-item">
+              <input type="checkbox" value="Web Development" checked />
+              <span>Web Design &amp; Development</span>
+            </label>
+            <label class="scoper-check-item">
+              <input type="checkbox" value="Paid Media & PPC" />
+              <span>Paid Media &amp; PPC Management</span>
+            </label>
+            <label class="scoper-check-item">
+              <input type="checkbox" value="Analytics Dashboard" />
+              <span>Analytics &amp; Performance Tracking</span>
+            </label>
+            <label class="scoper-check-item">
+              <input type="checkbox" value="Interactive Games" />
+              <span>Gamified Engagement Tools (Connect 3 / Match 2)</span>
+            </label>
+            <label class="scoper-check-item">
+              <input type="checkbox" value="AI Integration" />
+              <span>AI &amp; Automation Integration</span>
+            </label>
+          </div>
+
+          <div class="scoper-fields">
+            <input type="text" id="scoper-name" placeholder="Your Name *" required />
+            <input type="email" id="scoper-email" placeholder="Work Email *" required />
+            
+            <div class="custom-select-wrap" id="scoper-budget-wrap">
+              <button type="button" class="custom-select-trigger" id="budget-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="custom-select-value">Estimated Budget: TTD $5,000 – $15,000</span>
+                <span class="custom-select-arrow">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </button>
+              <div class="custom-select-options" role="listbox">
+                <div class="custom-option selected" role="option" aria-selected="true" data-value="TTD $5,000 - $15,000">
+                  <span class="opt-label">Estimated Budget: TTD $5,000 – $15,000</span>
+                  <span class="opt-badge">STARTER</span>
+                </div>
+                <div class="custom-option" role="option" aria-selected="false" data-value="TTD $15,000 - $35,000">
+                  <span class="opt-label">Estimated Budget: TTD $15,000 – $35,000</span>
+                  <span class="opt-badge">GROWTH</span>
+                </div>
+                <div class="custom-option" role="option" aria-selected="false" data-value="TTD $35,000+">
+                  <span class="opt-label">Estimated Budget: TTD $35,000+</span>
+                  <span class="opt-badge">SCALE</span>
+                </div>
+              </div>
+              <input type="hidden" id="scoper-budget" name="budget" value="TTD $5,000 - $15,000" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary scoper-submit-btn" id="scoper-submit-btn">
+            <span>SUBMIT PROJECT BRIEF →</span>
+          </button>
+        </form>
+
+        <div class="scoper-success" id="scoper-success" style="display:none;">
+          <h4>✓ Project Brief Received</h4>
+          <p>Our digital team will analyze your requirements and issue a structured proposal within 24 hours.</p>
+          <div class="scoper-ref" id="scoper-ref">// BRIEF-ID: DIG-000000</div>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <script type="module" src="/main.js"></script>
 </body>

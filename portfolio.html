@@ -29,7 +29,74 @@
       <a href="/contact.html">[04] CONTACT</a>
       <button class="btn-nav-book book-now-btn hover-target">BOOK NOW</button>
     </div>
+    <div class="nav-mobile-actions">
+      <button class="btn-nav-book-mobile book-now-btn">BOOK</button>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="toggle-icon">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </span>
+        <span class="toggle-label">MENU</span>
+      </button>
+    </div>
   </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Menu">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <span class="data-text mobile-sys-tag">[SYS.NAV // PORTAL 01]</span>
+      </div>
+      <button class="mobile-nav-close" aria-label="Close Navigation Menu">✕</button>
+    </div>
+    
+    <div class="mobile-nav-content">
+      <nav class="mobile-nav-links">
+        <a href="/#services" class="mobile-nav-item">
+          <span class="mobile-nav-idx">01</span>
+          <span class="mobile-nav-text">SERVICES</span>
+        </a>
+        <a href="/portfolio.html" class="mobile-nav-item active">
+          <span class="mobile-nav-idx">02</span>
+          <span class="mobile-nav-text">PORTFOLIO</span>
+        </a>
+        <a href="/motionmagic.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">03</span>
+          <span class="mobile-nav-text">MOTIONMAGIC</span>
+        </a>
+        <a href="/contact.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">04</span>
+          <span class="mobile-nav-text">CONTACT</span>
+        </a>
+      </nav>
+
+      <div class="mobile-drawer-cta">
+        <button class="btn-primary mobile-drawer-book book-now-btn">
+          <span>BOOK PRODUCTION NOW →</span>
+        </button>
+      </div>
+
+      <div class="mobile-drawer-portal">
+        <div class="mobile-portal-label">[ REGIONAL ENTITY ]</div>
+        <a href="/eventlabs/portfolio.html" class="mobile-portal-link">
+          <div class="mobile-portal-left">
+            <span class="portal-dot"></span>
+            <span class="mobile-portal-name">EVENT LABS GUYANA</span>
+          </div>
+          <span class="mobile-portal-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-footer">
+        <div class="mobile-footer-meta">
+          <div>TRINIDAD &amp; TOBAGO</div>
+          <a href="tel:+1868777LENS">+1 868-777-LENS</a>
+        </div>
+        <div class="mobile-footer-status">ONLINE // 2026</div>
+      </div>
+    </div>
+  </aside>
 
   <!-- Hero -->
   <section class="portfolio-hero">
@@ -39,8 +106,8 @@
         <h1 class="drama-text section-title" style="font-size: clamp(3.5rem, 8vw, 8rem); line-height:0.88;">Selected<br>Works.</h1>
       </div>
       <p>
-        A curated selection of projects spanning brand identity, digital campaigns, web experiences,
-        and MotionMagic Cam activations. Fifteen years of creative excellence across Trinidad &amp; Tobago.
+        A curated selection of commercial broadcasts, sports activations, corporate galas,
+        and high-speed MotionMagic Cam productions across Trinidad &amp; Tobago and the Caribbean.
       </p>
     </div>
   </section>
@@ -49,159 +116,122 @@
   <div class="portfolio-filters" id="portfolio-filters">
     <div class="filter-tabs">
       <button class="filter-tab active" data-filter="all" id="tab-all">ALL WORK</button>
-      <button class="filter-tab" data-filter="branding" id="tab-branding">BRANDING</button>
-      <button class="filter-tab" data-filter="digital" id="tab-digital">DIGITAL</button>
-      <button class="filter-tab" data-filter="motionmagic" id="tab-motionmagic">MOTIONMAGIC</button>
+      <button class="filter-tab" data-filter="event" id="tab-event">EVENT &amp; EXPERIENTIAL</button>
+      <button class="filter-tab" data-filter="commercial" id="tab-commercial">COMMERCIAL &amp; VIDEO</button>
+      <button class="filter-tab" data-filter="motionmagic" id="tab-motionmagic">MOTIONMAGIC &amp; 360</button>
+      <button class="filter-tab" data-filter="branding" id="tab-branding">BRANDING &amp; PRINT</button>
+      <button class="filter-tab" data-filter="digital" id="tab-digital">DIGITAL &amp; SOCIAL</button>
     </div>
-    <div class="filter-count" id="filter-count">12 PROJECTS</div>
+    <div class="filter-count" id="filter-count">37 CURATED WORKS</div>
   </div>
 
   <!-- Portfolio Grid -->
   <section class="portfolio-section">
     <div class="portfolio-grid" id="portfolio-grid">
-
-      <!-- BRANDING -->
-      <div class="portfolio-item wide" data-category="branding">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/Ads/FLYER.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// BRANDING · 2024</div>
-          <div class="portfolio-item-title">Popeyes TT — Brand Campaign</div>
-          <div class="portfolio-item-desc">Full seasonal campaign identity including in-store signage, social assets, and POS materials for the Trinidad &amp; Tobago market launch.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item tall" data-category="branding">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/Ads/B-SIDE.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// BRANDING · 2023</div>
-          <div class="portfolio-item-title">RudeBoy Records — Visual Identity</div>
-          <div class="portfolio-item-desc">Complete brand system: logo, typography, colour palette, merch, and digital presence for a leading Caribbean music label.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item half" data-category="branding">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/General%20Content/PATIO.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// BRANDING · 2023</div>
-          <div class="portfolio-item-title">Caribbean Bottlers — Packaging</div>
-          <div class="portfolio-item-desc">Label redesign and packaging system across a 14-SKU product line.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item half" data-category="branding">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/General%20Content/FEED_1.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// BRANDING · 2022</div>
-          <div class="portfolio-item-title">VISA Caribbean — Campaign Graphics</div>
-          <div class="portfolio-item-desc">Regional campaign artwork, OOH media, and event collateral for the Caribbean Payments Conference.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <!-- DIGITAL -->
-      <div class="portfolio-item tall" data-category="digital">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/General%20Content/5.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// DIGITAL · 2025</div>
-          <div class="portfolio-item-title">Hilton TT — Digital Presence</div>
-          <div class="portfolio-item-desc">Comprehensive social strategy, content production, paid media management, and analytics dashboard.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item wide" data-category="digital">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/General%20Content/BACK_GENERAL.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// DIGITAL · 2024</div>
-          <div class="portfolio-item-title">UWI Media Hub — Web Platform</div>
-          <div class="portfolio-item-desc">Full web design and development for the University of the West Indies media portal — responsive, accessible, and CMS-powered.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item third" data-category="digital">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/General%20Content/STORIES.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// DIGITAL · 2024</div>
-          <div class="portfolio-item-title">Caribbean Bottlers — Analytics &amp; PPC</div>
-          <div class="portfolio-item-desc">Paid media management and analytics setup driving a 38% increase in digital revenue.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item third" data-category="digital">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/General%20Content/STORIES_2.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// DIGITAL · 2023</div>
-          <div class="portfolio-item-title">Burger King TT — Social Media</div>
-          <div class="portfolio-item-desc">12-month social media management, content creation, and community management for the TT market.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item third" data-category="digital">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/General%20Content/Mother_s%20Day%20Promotion_2.png'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// DIGITAL · 2022</div>
-          <div class="portfolio-item-title">Popeyes — Launch Campaign</div>
-          <div class="portfolio-item-desc">Full-funnel digital campaign for the Trinidad market launch generating 2M+ organic impressions.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <!-- MOTIONMAGIC -->
-      <div class="portfolio-item half" data-category="motionmagic">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/Photo%20Albums/SHELL%20Black%20%26%20White%20Gala%202025/untitled-5.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// MOTIONMAGIC · 2025</div>
-          <div class="portfolio-item-title">VISA TT — Corporate Activation</div>
-          <div class="portfolio-item-desc">MotionMagic Cam deployment at the VISA Caribbean Payments Forum — 400+ activations over 3 hours.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item half" data-category="motionmagic">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/Photo%20Albums/SHELL%20Black%20%26%20White%20Gala%202025/untitled-12.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// MOTIONMAGIC · 2025</div>
-          <div class="portfolio-item-title">Popeyes — Brand Activation</div>
-          <div class="portfolio-item-desc">Full Glam Package deployment at the national launch event with custom branded overlay and playlist.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item wide" data-category="motionmagic">
-        <div class="portfolio-item-bg" style="background-image: url('/Portfolio/Our%20Work/Photo%20Albums/SHELL%20Black%20%26%20White%20Gala%202025/untitled-102.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="portfolio-item-overlay"></div>
-        <div class="portfolio-item-content">
-          <div class="portfolio-item-cat">// MOTIONMAGIC · 2024 — CREATIVE TIER</div>
-          <div class="portfolio-item-title">Private Luxury Gala — Custom Production</div>
-          <div class="portfolio-item-desc">Full Custom tier deployment with bespoke arm choreography, 4-angle setup, and full production crew for a high-end private event in Port of Spain.</div>
-          <div class="portfolio-item-link">VIEW PROJECT →</div>
-        </div>
-      </div>
-
-      <!-- Empty state -->
+      <!-- Items dynamically rendered by portfolio.js -->
       <div class="portfolio-empty" id="portfolio-empty">
         // NO PROJECTS IN THIS CATEGORY YET — CHECK BACK SOON.
       </div>
-
     </div>
   </section>
+
+  <!-- ============================================================
+       PHOTO ALBUM LIGHTBOX MODAL
+  ============================================================ -->
+  <div class="lenscape-modal-backdrop" id="photo-lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Album Gallery">
+    <div class="modal-top-bar">
+      <div class="modal-title-wrap">
+        <span class="modal-proj-cat" id="lightbox-cat">// EVENT &amp; EXPERIENTIAL</span>
+        <h3 class="modal-proj-title" id="lightbox-title">Event Title</h3>
+      </div>
+      <div class="modal-controls">
+        <span class="modal-counter" id="lightbox-counter">01 / 15</span>
+        <button class="modal-close-btn" id="lightbox-close-btn" aria-label="Close Lightbox">✕</button>
+      </div>
+    </div>
+
+    <div class="lightbox-stage">
+      <button class="lightbox-nav-btn lightbox-nav-prev" id="lightbox-prev-btn" aria-label="Previous Photo">←</button>
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="" class="lightbox-main-img" id="lightbox-main-img" />
+      </div>
+      <button class="lightbox-nav-btn lightbox-nav-next" id="lightbox-next-btn" aria-label="Next Photo">→</button>
+    </div>
+
+    <!-- Filmstrip Thumbnails -->
+    <div class="lightbox-filmstrip-bar" id="lightbox-filmstrip"></div>
+
+    <!-- Actions Footer -->
+    <div class="lightbox-bottom-bar">
+      <span class="lightbox-hint">// USE [← / →] TO NAVIGATE · [ESC] TO CLOSE</span>
+      <button class="btn-primary" id="lightbox-book-btn"><span>BOOK EVENT COVERAGE →</span></button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CINEMATIC VIDEO PLAYER MODAL
+  ============================================================ -->
+  <div class="lenscape-modal-backdrop" id="video-player-modal" role="dialog" aria-modal="true" aria-label="Video Player">
+    <div class="modal-top-bar">
+      <div class="modal-title-wrap">
+        <span class="modal-proj-cat" id="video-modal-cat">// COMMERCIAL &amp; VIDEO</span>
+        <h3 class="modal-proj-title" id="video-modal-title">Commercial Title</h3>
+      </div>
+      <div class="modal-controls">
+        <span class="modal-counter" id="video-modal-duration">0:20</span>
+        <button class="modal-close-btn" id="video-modal-close-btn" aria-label="Close Video">✕</button>
+      </div>
+    </div>
+
+    <div class="video-modal-body">
+      <div class="video-modal-viewport">
+        <video id="video-modal-element" controls playsinline preload="auto"></video>
+      </div>
+      <div class="video-modal-sidebar">
+        <div class="video-meta-block">
+          <div class="video-meta-label">Client</div>
+          <div class="video-meta-val" id="video-modal-client">Client Name</div>
+        </div>
+        <div class="video-meta-block">
+          <div class="video-meta-label">Format / Deliverables</div>
+          <div class="video-meta-val" id="video-modal-format">16:9 Broadcast Commercial</div>
+        </div>
+        <div class="video-meta-block">
+          <div class="video-meta-label">Scope &amp; Impact</div>
+          <p class="video-meta-desc" id="video-modal-desc">Project description goes here.</p>
+        </div>
+        <button class="btn-primary" id="video-modal-book-btn" style="margin-top: 0.5rem;">
+          <span>COMMISSION A VIDEO SPOT →</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       IMAGE / PRINT DETAIL LIGHTBOX
+  ============================================================ -->
+  <div class="lenscape-modal-backdrop" id="image-detail-modal" role="dialog" aria-modal="true" aria-label="Graphic Detail">
+    <div class="modal-top-bar">
+      <div class="modal-title-wrap">
+        <span class="modal-proj-cat" id="img-detail-cat">// BRANDING &amp; PRINT</span>
+        <h3 class="modal-proj-title" id="img-detail-title">Project Title</h3>
+      </div>
+      <div class="modal-controls">
+        <button class="modal-close-btn" id="img-detail-close-btn" aria-label="Close View">✕</button>
+      </div>
+    </div>
+
+    <div class="lightbox-stage">
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="" class="lightbox-main-img" id="img-detail-img" />
+      </div>
+    </div>
+
+    <div class="lightbox-bottom-bar">
+      <span class="lightbox-hint" id="img-detail-client">// CLIENT NAME</span>
+      <button class="btn-primary" id="img-detail-book-btn"><span>START A BRANDING PROJECT →</span></button>
+    </div>
+  </div>
 
   <!-- CTA -->
   <section style="

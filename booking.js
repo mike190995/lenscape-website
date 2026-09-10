@@ -19,11 +19,12 @@ let calendarMonth  = new Date().getMonth()
 let formData       = {}
 
 const bookedDates  = new Map()
+let bookingConfig  = { country: 'TT', currency: 'TTD' }
 
 // ============================================================
 // MODAL HTML TEMPLATE
 // ============================================================
-function createModalHTML() {
+function createModalHTML(config = bookingConfig) {
   return `
   <div class="modal-backdrop" id="booking-modal-backdrop" role="dialog" aria-modal="true" aria-label="Book the MotionMagic Cam">
     <div class="booking-modal" data-lenis-prevent>
@@ -32,7 +33,7 @@ function createModalHTML() {
       <div class="modal-header">
         <div class="modal-header-text">
           <div class="modal-title">Book the Booth</div>
-          <div class="modal-subtitle">// MOTIONMAGIC CAM — REQUEST FORM</div>
+          <div class="modal-subtitle">// MOTIONMAGIC CAM — ${config.country === 'GY' ? 'EVENT LABS GUYANA ' : ''}REQUEST FORM</div>
         </div>
         <button class="modal-close" id="modal-close-btn" aria-label="Close modal">✕</button>
       </div>
@@ -116,6 +117,24 @@ function createModalHTML() {
               <label class="form-label" for="field-location">Event Location *</label>
               <select class="form-select" id="field-location" name="location" required>
                 <option value="" disabled selected>Select location</option>
+                ${config.country === 'GY' ? `
+                <optgroup label="Guyana">
+                  <option value="Georgetown, Guyana">Georgetown</option>
+                  <option value="East Coast Demerara, Guyana">East Coast Demerara</option>
+                  <option value="East Bank Demerara, Guyana">East Bank Demerara</option>
+                  <option value="New Amsterdam, Guyana">New Amsterdam</option>
+                  <option value="Linden, Guyana">Linden</option>
+                  <option value="Bartica, Guyana">Bartica</option>
+                  <option value="Other, Guyana">Other (Guyana)</option>
+                </optgroup>
+                <optgroup label="Trinidad & Tobago">
+                  <option value="Port of Spain, Trinidad">Port of Spain</option>
+                  <option value="San Fernando, Trinidad">San Fernando</option>
+                  <option value="Chaguanas, Trinidad">Chaguanas</option>
+                  <option value="Santa Cruz, Trinidad">Santa Cruz</option>
+                  <option value="Other, Trinidad & Tobago">Other (Trinidad &amp; Tobago)</option>
+                </optgroup>
+                ` : `
                 <optgroup label="Trinidad">
                   <option value="Port of Spain, Trinidad">Port of Spain</option>
                   <option value="San Fernando, Trinidad">San Fernando</option>
@@ -128,6 +147,16 @@ function createModalHTML() {
                   <option value="Scarborough, Tobago">Scarborough, Tobago</option>
                   <option value="Other, Tobago">Other (Tobago)</option>
                 </optgroup>
+                <optgroup label="Guyana (Event Labs)">
+                  <option value="Georgetown, Guyana">Georgetown</option>
+                  <option value="East Coast Demerara, Guyana">East Coast Demerara</option>
+                  <option value="East Bank Demerara, Guyana">East Bank Demerara</option>
+                  <option value="New Amsterdam, Guyana">New Amsterdam</option>
+                  <option value="Linden, Guyana">Linden</option>
+                  <option value="Bartica, Guyana">Bartica</option>
+                  <option value="Other, Guyana">Other (Guyana)</option>
+                </optgroup>
+                `}
               </select>
               <div class="field-error" id="err-location">Please select a location.</div>
             </div>
@@ -180,7 +209,7 @@ function createModalHTML() {
                 </label>
                 <label class="check-item">
                   <input type="checkbox" name="addons" value="Transport" id="addon-transport" />
-                  Transport Required (+TTD $250)
+                  <span id="addon-transport-label">Transport Required (+${config.currency === 'GYD' ? 'GYD $10,000' : (config.currency === 'USD' ? 'USD $50' : 'TTD $250')})</span>
                 </label>
               </div>
             </div>
@@ -238,7 +267,7 @@ function createModalHTML() {
                   font-size: 1.5rem;
                   font-weight: 700;
                   color: var(--accent);
-                ">TTD $3,250</div>
+                ">${config.currency === 'GYD' ? 'GYD $120,000' : (config.currency === 'USD' ? 'USD $600' : 'TTD $3,250')}</div>
               </div>
               <div id="price-breakdown" style="
                 font-family: var(--font-data);
@@ -266,7 +295,7 @@ function createModalHTML() {
             <div class="booking-success-icon">◆</div>
             <h3>Request Submitted</h3>
             <p>
-              Your booking request is now in the queue. The Lenscape team will review your
+              Your booking request is now in the queue. The ${config.country === 'GY' ? 'Event Labs Guyana' : 'Lenscape'} team will review your
               details and confirm availability within <strong>24 hours</strong>.
             </p>
             <div style="
@@ -276,7 +305,7 @@ function createModalHTML() {
               color: var(--accent);
               opacity: 0.8;
               margin-bottom: 2rem;
-            " id="success-ref-num">// REF: LSC-000000</div>
+            " id="success-ref-num">// REF: ${config.country === 'GY' ? 'EVNTLB-GY' : 'LSC'}-000000</div>
             <button class="btn-ghost" id="modal-done-btn">CLOSE</button>
           </div>
         </div>
@@ -493,10 +522,14 @@ function collectFormData() {
   const addons = Array.from(form.querySelectorAll('input[name="addons"]:checked'))
     .map(el => el.value)
 
+  const loc = document.getElementById('field-location')?.value || ''
+  const isGuyana = bookingConfig.country === 'GY' || loc.includes('Guyana')
+  const currency = isGuyana ? (bookingConfig.currency === 'USD' ? 'USD' : 'GYD') : (bookingConfig.currency || 'TTD')
+
   return {
     clientName:    document.getElementById('field-client-name').value.trim(),
     eventName:     document.getElementById('field-event-name').value.trim(),
-    location:      document.getElementById('field-location').value,
+    location:      loc,
     date:          selectedDate || '',
     startTime:     document.getElementById('field-start-time').value,
     endTime:       document.getElementById('field-end-time').value,
@@ -505,6 +538,9 @@ function collectFormData() {
     tier:          form.querySelector('input[name="tier"]:checked')?.value || 'basic',
     customArmPaths: document.getElementById('field-custom-arm')?.checked || false,
     notes:         document.getElementById('field-notes').value.trim(),
+    country:       isGuyana ? 'GY' : 'TT',
+    territory:     isGuyana ? 'Guyana' : 'Trinidad & Tobago',
+    currency
   }
 }
 
@@ -519,13 +555,27 @@ function updatePriceEstimate() {
   const start     = document.getElementById('field-start-time').value
   const end       = document.getElementById('field-end-time').value
   const transport = document.getElementById('addon-transport')?.checked || false
+  const loc       = document.getElementById('field-location')?.value || ''
+
+  const isGuyana  = bookingConfig.country === 'GY' || loc.includes('Guyana')
+  const currency  = isGuyana ? (bookingConfig.currency === 'USD' ? 'USD' : 'GYD') : (bookingConfig.currency || 'TTD')
+
+  // Live update transport label based on active territory
+  const transLabel = document.getElementById('addon-transport-label')
+  if (transLabel) {
+    transLabel.textContent = isGuyana
+      ? (currency === 'USD' ? 'Transport Required (+USD $50)' : 'Transport Required (+GYD $10,000)')
+      : 'Transport Required (+TTD $250)'
+  }
 
   const { hours } = validateDuration(start, end)
-  const result    = calculatePrice(tier, hours || 2, transport)
+  const result    = calculatePrice(tier, hours || 2, transport, currency)
 
   const valEl = document.getElementById('price-estimate-value')
   const brkEl = document.getElementById('price-breakdown')
-  if (valEl) valEl.textContent = result.estimate
+  if (valEl) {
+    valEl.textContent = result.estimate
+  }
   if (brkEl) {
     if (result.breakdown.note) {
       brkEl.textContent = result.breakdown.note
@@ -605,11 +655,19 @@ function closeModal() {
 }
 
 // ============================================================
-// INIT
+// INIT & EXPORTS
 // ============================================================
-export function initBookingModal() {
+export { openModal as openBookingModal };
+
+export function initBookingModal(options = {}) {
+  const isEventLabs = options.country === 'GY' || (typeof window !== 'undefined' && window.location.pathname.includes('/eventlabs'))
+  bookingConfig = {
+    country: isEventLabs ? 'GY' : 'TT',
+    currency: isEventLabs ? 'GYD' : 'TTD',
+    ...options
+  }
   // Inject modal HTML
-  document.body.insertAdjacentHTML('beforeend', createModalHTML())
+  document.body.insertAdjacentHTML('beforeend', createModalHTML(bookingConfig))
 
   // Bind open buttons (all .book-now-btn on page)
   document.querySelectorAll('.book-now-btn').forEach(btn => {
@@ -624,6 +682,9 @@ export function initBookingModal() {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal()
   })
+
+  // Location change triggers currency & estimate update
+  document.getElementById('field-location')?.addEventListener('change', updatePriceEstimate)
 
   // Calendar nav
   document.getElementById('cal-prev')?.addEventListener('click', () => {
@@ -670,7 +731,8 @@ export function initBookingModal() {
 
       if (result.success) {
         const ref = document.getElementById('success-ref-num')
-        if (ref) ref.textContent = `// REF: LSC-${Date.now().toString().slice(-6)}`
+        const prefix = (formData.country === 'GY' || bookingConfig.country === 'GY') ? 'EVNTLB-GY' : 'LSC'
+        if (ref) ref.textContent = `// REF: ${prefix}-${Date.now().toString().slice(-6)}`
         goToStep(3)
       } else {
         nextBtn.innerHTML = '<span>RETRY →</span>'

@@ -9,6 +9,8 @@ import Lenis from '@studio-freight/lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
+import { initBentoGrid } from './bento-grid.js'
+import './mobile-nav.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -264,6 +266,7 @@ function initInteractions() {
     document.querySelector('.book-now-btn')?.click()
   })
 
-  // --- Booking Modal ---
+  // --- Booking Modal & Bento Grid ---
   initBookingModal()
+  initBentoGrid()
 }

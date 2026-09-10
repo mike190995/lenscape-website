@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Event Labs Guyana</title>
+  <meta name="description" content="Selected Works across Guyana, Trinidad & Tobago, and the wider Caribbean. High-impact event media, brand launches, commercial video, and MotionMagic Cam productions by Event Labs Guyana (A Lenscape Company)." />
+  <link rel="stylesheet" href="/eventlabs.css" />
+</head>
+<body class="eventlabs">
+  <div class="noise-overlay"></div>
+  <div class="custom-cursor"></div>
+
+  <div id="loader">
+    <div class="data-text" style="margin-bottom:1.5rem; opacity:0.5; letter-spacing:0.25em;">SYSTEM_INIT // EVNTLB-GY.02</div>
+    <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="navbar">
+    <a href="/eventlabs/" class="logo" aria-label="Event Labs Guyana">
+      <img src="/Company%20Logo/Lenscape%20Guyana/Event%20Lab%20Logo%201%20Cropped.png" alt="Event Labs Guyana" class="logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/eventlabs/#services">[01] SERVICES</a>
+      <a href="/eventlabs/portfolio.html" class="active">[02] PORTFOLIO</a>
+      <a href="/eventlabs/motionmagic.html">[03] MOTIONMAGIC</a>
+      <a href="/eventlabs/contact.html">[04] CONTACT</a>
+      <button class="btn-nav-book book-now-btn hover-target">BOOK NOW</button>
+    </div>
+    <div class="nav-mobile-actions">
+      <button class="btn-nav-book-mobile book-now-btn">BOOK</button>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="toggle-icon">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </span>
+        <span class="toggle-label">MENU</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Menu">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <span class="data-text mobile-sys-tag">[SYS.NAV // EVENT LABS GY]</span>
+      </div>
+      <button class="mobile-nav-close" aria-label="Close Navigation Menu">✕</button>
+    </div>
+    
+    <div class="mobile-nav-content">
+      <nav class="mobile-nav-links">
+        <a href="/eventlabs/#services" class="mobile-nav-item">
+          <span class="mobile-nav-idx">01</span>
+          <span class="mobile-nav-text">SERVICES</span>
+        </a>
+        <a href="/eventlabs/portfolio.html" class="mobile-nav-item active">
+          <span class="mobile-nav-idx">02</span>
+          <span class="mobile-nav-text">PORTFOLIO</span>
+        </a>
+        <a href="/eventlabs/motionmagic.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">03</span>
+          <span class="mobile-nav-text">MOTIONMAGIC</span>
+        </a>
+        <a href="/eventlabs/contact.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">04</span>
+          <span class="mobile-nav-text">CONTACT</span>
+        </a>
+      </nav>
+
+      <div class="mobile-drawer-cta">
+        <button class="btn-primary mobile-drawer-book book-now-btn">
+          <span>BOOK PRODUCTION NOW →</span>
+        </button>
+      </div>
+
+      <div class="mobile-drawer-portal">
+        <div class="mobile-portal-label">[ REGIONAL ENTITY ]</div>
+        <a href="/portfolio.html" class="mobile-portal-link">
+          <div class="mobile-portal-left">
+            <span class="portal-dot portal-dot-tt"></span>
+            <span class="mobile-portal-name">LENSCAPE TRINIDAD &amp; TOBAGO</span>
+          </div>
+          <span class="mobile-portal-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-footer">
+        <div class="mobile-footer-meta">
+          <div>GEORGETOWN, GUYANA</div>
+          <a href="tel:+592225LABS">+592 225-LABS</a>
+        </div>
+        <div class="mobile-footer-status">ONLINE // 2026</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Hero -->
+  <section class="portfolio-hero">
+    <div class="portfolio-hero-grid">
+      <div>
+        <div class="section-label">THE WORK // REGIONAL SHOWCASE</div>
+        <h1 class="drama-text section-title" style="font-size: clamp(3.5rem, 8vw, 8rem); line-height:0.88;">Selected<br>Works.</h1>
+      </div>
+      <p>
+        Selected Works across Guyana, Trinidad &amp; Tobago, and the wider Caribbean.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <div class="portfolio-filters" id="portfolio-filters">
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all" id="tab-all">ALL WORK</button>
+      <button class="filter-tab" data-filter="event" id="tab-event">EVENT &amp; EXPERIENTIAL</button>
+      <button class="filter-tab" data-filter="commercial" id="tab-commercial">COMMERCIAL &amp; VIDEO</button>
+      <button class="filter-tab" data-filter="motionmagic" id="tab-motionmagic">MOTIONMAGIC &amp; 360</button>
+      <button class="filter-tab" data-filter="branding" id="tab-branding">BRANDING &amp; PRINT</button>
+      <button class="filter-tab" data-filter="digital" id="tab-digital">DIGITAL &amp; SOCIAL</button>
+    </div>
+    <div class="filter-count" id="filter-count">37 CURATED WORKS</div>
+  </div>
+
+  <!-- Portfolio Grid -->
+  <section class="portfolio-section">
+    <div class="portfolio-grid" id="portfolio-grid">
+      <!-- Items dynamically rendered by portfolio.js -->
+      <div class="portfolio-empty" id="portfolio-empty">
+        // NO PROJECTS IN THIS CATEGORY YET — CHECK BACK SOON.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PHOTO ALBUM LIGHTBOX MODAL
+  ============================================================ -->
+  <div class="lenscape-modal-backdrop" id="photo-lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Album Gallery">
+    <div class="modal-top-bar">
+      <div class="modal-title-wrap">
+        <span class="modal-proj-cat" id="lightbox-cat">// EVENT &amp; EXPERIENTIAL</span>
+        <h3 class="modal-proj-title" id="lightbox-title">Event Title</h3>
+      </div>
+      <div class="modal-controls">
+        <span class="modal-counter" id="lightbox-counter">01 / 15</span>
+        <button class="modal-close-btn" id="lightbox-close-btn" aria-label="Close Lightbox">✕</button>
+      </div>
+    </div>
+
+    <div class="lightbox-stage">
+      <button class="lightbox-nav-btn lightbox-nav-prev" id="lightbox-prev-btn" aria-label="Previous Photo">←</button>
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="" class="lightbox-main-img" id="lightbox-main-img" />
+      </div>
+      <button class="lightbox-nav-btn lightbox-nav-next" id="lightbox-next-btn" aria-label="Next Photo">→</button>
+    </div>
+
+    <!-- Filmstrip Thumbnails -->
+    <div class="lightbox-filmstrip-bar" id="lightbox-filmstrip"></div>
+
+    <!-- Actions Footer -->
+    <div class="lightbox-bottom-bar">
+      <span class="lightbox-hint">// USE [← / →] TO NAVIGATE · [ESC] TO CLOSE</span>
+      <button class="btn-primary" id="lightbox-book-btn"><span>BOOK EVENT COVERAGE →</span></button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CINEMATIC VIDEO PLAYER MODAL
+  ============================================================ -->
+  <div class="lenscape-modal-backdrop" id="video-player-modal" role="dialog" aria-modal="true" aria-label="Video Player">
+    <div class="modal-top-bar">
+      <div class="modal-title-wrap">
+        <span class="modal-proj-cat" id="video-modal-cat">// COMMERCIAL &amp; VIDEO</span>
+        <h3 class="modal-proj-title" id="video-modal-title">Commercial Title</h3>
+      </div>
+      <div class="modal-controls">
+        <span class="modal-counter" id="video-modal-duration">0:20</span>
+        <button class="modal-close-btn" id="video-modal-close-btn" aria-label="Close Video">✕</button>
+      </div>
+    </div>
+
+    <div class="video-modal-body">
+      <div class="video-modal-viewport">
+        <video id="video-modal-element" controls playsinline preload="auto"></video>
+      </div>
+      <div class="video-modal-sidebar">
+        <div class="video-meta-block">
+          <div class="video-meta-label">Client</div>
+          <div class="video-meta-val" id="video-modal-client">Client Name</div>
+        </div>
+        <div class="video-meta-block">
+          <div class="video-meta-label">Format / Deliverables</div>
+          <div class="video-meta-val" id="video-modal-format">16:9 Broadcast Commercial</div>
+        </div>
+        <div class="video-meta-block">
+          <div class="video-meta-label">Scope &amp; Impact</div>
+          <p class="video-meta-desc" id="video-modal-desc">Project description goes here.</p>
+        </div>
+        <button class="btn-primary" id="video-modal-book-btn" style="margin-top: 0.5rem;">
+          <span>COMMISSION A VIDEO SPOT →</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       IMAGE / PRINT DETAIL LIGHTBOX
+  ============================================================ -->
+  <div class="lenscape-modal-backdrop" id="image-detail-modal" role="dialog" aria-modal="true" aria-label="Graphic Detail">
+    <div class="modal-top-bar">
+      <div class="modal-title-wrap">
+        <span class="modal-proj-cat" id="img-detail-cat">// BRANDING &amp; PRINT</span>
+        <h3 class="modal-proj-title" id="img-detail-title">Project Title</h3>
+      </div>
+      <div class="modal-controls">
+        <button class="modal-close-btn" id="img-detail-close-btn" aria-label="Close View">✕</button>
+      </div>
+    </div>
+
+    <div class="lightbox-stage">
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="" class="lightbox-main-img" id="img-detail-img" />
+      </div>
+    </div>
+
+    <div class="lightbox-bottom-bar">
+      <span class="lightbox-hint" id="img-detail-client">// CLIENT NAME</span>
+      <button class="btn-primary" id="img-detail-book-btn"><span>START A BRANDING PROJECT →</span></button>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section style="
+    padding: 8rem var(--page-padding);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  ">
+    <div class="section-label">NEXT STEP // GUYANA</div>
+    <h2 class="drama-text" style="font-size: clamp(2.5rem, 6vw, 5rem); max-width: 18ch; line-height: 0.95;">
+      Ready to elevate your event?
+    </h2>
+    <p style="color: var(--text-muted); max-width: 38ch; line-height: 1.8;">
+      Let's discuss your project. Whether it's an immersive brand launch in Georgetown or commissioning the MotionMagic Cam.
+    </p>
+    <div style="display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center; margin-top:0.5rem;">
+      <a href="/eventlabs/contact.html" class="btn-primary hover-target"><span>START A PROJECT →</span></a>
+      <a href="/eventlabs/motionmagic.html" class="btn-ghost hover-target">BOOK THE BOOTH</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <a href="/eventlabs/" class="logo" aria-label="Event Labs Guyana">
+      <img src="/Company%20Logo/Lenscape%20Guyana/Event%20Lab%20Logo%203.png" alt="Event Labs Guyana" class="logo-img" />
+    </a>
+    <div class="footer-legal">© 2026 EVENT LABS GUYANA. A LENSCAPE COMPANY.</div>
+    <div class="data-text" style="opacity:0.35; font-size:0.58rem;">PORTFOLIO // EVNTLB-GY.02</div>
+  </footer>
+
+  <script type="module" src="/portfolio.js"></script>
+</body>
+</html>

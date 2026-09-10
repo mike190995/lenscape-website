@@ -10,12 +10,29 @@
 // CONFIG — replace with your deployed Apps Script URL
 // ============================================================
 export const BOOKING_CONFIG = {
-  SHEETS_ENDPOINT: 'https://script.google.com/macros/s/AKfycbxzN7LpfOw6yduHM6uae-b7eryQMkJ1AWYjiKbrFbpFum9ik79HAIjTpwchDwtbQ6pncg/exec',
+  SHEETS_ENDPOINT: 'https://script.google.com/macros/s/AKfycbyVYgpu19c2b9-R3G3mcEzoC3JMKyyAEghVLb6qSX9jMX1T2kI8mFbHeEbAeo9TPEF1/exec',
   MIN_DURATION_HOURS: 2,
   TRANSPORT_COST: 250,
+  TRANSPORT_COSTS: {
+    TTD: 250,
+    GYD: 10000,
+    USD: 50
+  },
   PRICING: {
     basic: { 2: 3250, 3: 3750, 4: 4250, 5: 4750 },
-    glam:  { 2: 4250, 3: 4750, 4: 5250, 5: 5750 }
+    glam: { 2: 4250, 3: 4750, 4: 5250, 5: 5750 },
+    TTD: {
+      basic: { 2: 3250, 3: 3750, 4: 4250, 5: 4750 },
+      glam: { 2: 4250, 3: 4750, 4: 5250, 5: 5750 }
+    },
+    GYD: {
+      basic: { 2: 120000, 3: 150000, 4: 180000, 5: 210000 },
+      glam: { 2: 160000, 3: 195000, 4: 230000, 5: 265000 }
+    },
+    USD: {
+      basic: { 2: 600, 3: 750, 4: 900, 5: 1050 },
+      glam: { 2: 800, 3: 975, 4: 1150, 5: 1325 }
+    }
   }
 }
 
@@ -40,7 +57,7 @@ function parseTime(timeStr) {
  */
 export function validateDuration(startTime, endTime) {
   const start = parseTime(startTime)
-  const end   = parseTime(endTime)
+  const end = parseTime(endTime)
 
   if (start === null || end === null) {
     return { valid: false, hours: 0, message: 'Please select both start and end times.' }
@@ -51,7 +68,7 @@ export function validateDuration(startTime, endTime) {
   }
 
   const diffMins = end - start
-  const hours    = diffMins / 60
+  const hours = diffMins / 60
 
   if (hours < BOOKING_CONFIG.MIN_DURATION_HOURS) {
     const shortfall = BOOKING_CONFIG.MIN_DURATION_HOURS - hours
@@ -75,37 +92,44 @@ export function validateDuration(startTime, endTime) {
 
 /**
  * Calculates the estimated price for a booking.
- * @param {string} tier      - 'basic' | 'glam' | 'custom'
- * @param {number} hours     - booking duration in hours
+ * @param {string} tier       - 'basic' | 'glam' | 'custom'
+ * @param {number} hours      - booking duration in hours
  * @param {boolean} transport - whether transport is required
- * @returns {{ estimate: string, isCustom: boolean, breakdown: object }}
+ * @param {string} currency   - 'TTD' | 'GYD' | 'USD' (defaults to 'TTD')
+ * @returns {{ estimate: string, isCustom: boolean, breakdown: object, currency: string }}
  */
-export function calculatePrice(tier, hours, transport = false) {
+export function calculatePrice(tier, hours, transport = false, currency = 'TTD') {
   if (tier === 'custom') {
     return {
       estimate: 'Custom Quote',
       isCustom: true,
+      currency,
       breakdown: { note: 'Creative/Custom pricing requires team review.' }
     }
   }
 
+  const curr = (currency || 'TTD').toUpperCase()
+  const pricingTable = BOOKING_CONFIG.PRICING[curr] || BOOKING_CONFIG.PRICING.TTD || BOOKING_CONFIG.PRICING
+
   const roundedHours = Math.min(5, Math.max(2, Math.round(hours)))
-  const basePrice    = BOOKING_CONFIG.PRICING[tier]?.[roundedHours] ?? null
+  const basePrice = pricingTable[tier]?.[roundedHours] ?? null
 
   if (!basePrice) {
-    return { estimate: 'Contact Us', isCustom: true, breakdown: {} }
+    return { estimate: 'Contact Us', isCustom: true, currency: curr, breakdown: {} }
   }
 
-  const transportCost = transport ? BOOKING_CONFIG.TRANSPORT_COST : 0
-  const total         = basePrice + transportCost
+  const transportRate = BOOKING_CONFIG.TRANSPORT_COSTS?.[curr] ?? BOOKING_CONFIG.TRANSPORT_COST
+  const transportCost = transport ? transportRate : 0
+  const total = basePrice + transportCost
 
   return {
-    estimate: `TTD $${total.toLocaleString()}`,
+    estimate: `${curr} $${total.toLocaleString()}`,
+    currency: curr,
     isCustom: false,
     breakdown: {
-      base: `$${basePrice}`,
-      transport: transport ? `+$${transportCost}` : null,
-      total: `$${total}`
+      base: `$${basePrice.toLocaleString()}`,
+      transport: transport ? `+$${transportCost.toLocaleString()}` : null,
+      total: `$${total.toLocaleString()}`
     }
   }
 }
@@ -121,9 +145,9 @@ export function calculatePrice(tier, hours, transport = false) {
  */
 export function flagPremium(payload) {
   if (payload.tier === 'custom' || payload.customArmPaths) {
-    payload.status       = 'Pending — Premium Review Required'
-    payload.isPremium    = true
-    payload.notes        = `[PREMIUM FLAG] Custom Arm Paths requested. ${payload.notes || ''}`
+    payload.status = 'Pending — Premium Review Required'
+    payload.isPremium = true
+    payload.notes = `[PREMIUM FLAG] Custom Arm Paths requested. ${payload.notes || ''}`
   }
   return payload
 }
@@ -139,20 +163,23 @@ export function flagPremium(payload) {
  */
 export function buildPayload(formData) {
   const raw = { ...formData }
+  const isGuyana = raw.territory === 'Guyana' || (raw.location && raw.location.includes('Guyana'))
 
   const payload = {
-    timestamp:   new Date().toISOString(),
-    status:      'Pending',
-    clientName:  sanitize(raw.clientName),
-    eventName:   sanitize(raw.eventName),
-    date:        raw.date || '',
-    location:    sanitize(raw.location),
-    timeSlot:    raw.startTime && raw.endTime ? `${raw.startTime} – ${raw.endTime}` : '',
-    addons:      Array.isArray(raw.addons) ? raw.addons.join(', ') : (raw.addons || ''),
-    tier:        raw.tier || 'basic',
-    music:       sanitize(raw.music),
-    notes:       sanitize(raw.notes),
-    isPremium:   false,
+    timestamp: new Date().toISOString(),
+    status: 'Pending',
+    territory: isGuyana ? 'Guyana' : 'Trinidad & Tobago',
+    currency: raw.currency || (isGuyana ? 'GYD' : 'TTD'),
+    clientName: sanitize(raw.clientName),
+    eventName: sanitize(raw.eventName),
+    date: raw.date || '',
+    location: sanitize(raw.location),
+    timeSlot: raw.startTime && raw.endTime ? `${raw.startTime} – ${raw.endTime}` : '',
+    addons: Array.isArray(raw.addons) ? raw.addons.join(', ') : (raw.addons || ''),
+    tier: raw.tier || 'basic',
+    music: sanitize(raw.music),
+    notes: sanitize(raw.notes),
+    isPremium: false,
     customArmPaths: raw.customArmPaths || false,
   }
 
@@ -196,7 +223,7 @@ export async function submitBooking(formData) {
   try {
     const res = await fetch(BOOKING_CONFIG.SHEETS_ENDPOINT, {
       method: 'POST',
-      mode:   'no-cors', // Apps Script requires no-cors
+      mode: 'no-cors', // Apps Script requires no-cors
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
@@ -232,14 +259,14 @@ function fakeDelay(ms) {
  * @returns {Promise<Record<string, { event: string, time: string, booth: string }>>}
  */
 export async function fetchBookedDates() {
-  const isStub = !BOOKING_CONFIG.SHEETS_ENDPOINT || 
-                 BOOKING_CONFIG.SHEETS_ENDPOINT.includes('YOUR_DEPLOYMENT_ID');
+  const isStub = !BOOKING_CONFIG.SHEETS_ENDPOINT ||
+    BOOKING_CONFIG.SHEETS_ENDPOINT.includes('YOUR_DEPLOYMENT_ID');
 
   if (isStub) {
     console.warn('[Lenscape Booking] Running in STUB MODE for availability. Configure SHEETS_ENDPOINT to enable live sync.');
-    
+
     const today = new Date();
-    const year  = today.getFullYear();
+    const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
 
     // Return mock booked dates with event/time metadata
@@ -255,8 +282,8 @@ export async function fetchBookedDates() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000); // 8-second timeout
 
-    const res = await fetch(BOOKING_CONFIG.SHEETS_ENDPOINT, { 
-      signal: controller.signal 
+    const res = await fetch(BOOKING_CONFIG.SHEETS_ENDPOINT, {
+      signal: controller.signal
     });
     clearTimeout(timeoutId);
 

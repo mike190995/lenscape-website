@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MotionMagic Cam | Event Labs Guyana</title>
+  <meta name="description"
+    content="The MotionMagic Cam — Event Labs Guyana's interactive 360° video booth experience. Premier robotic camera activation for events, launches, and entertainment across Guyana." />
+  <link rel="stylesheet" href="/eventlabs.css" />
+</head>
+
+<body class="eventlabs">
+  <!-- Atmosphere -->
+  <div class="noise-overlay"></div>
+  <div class="custom-cursor"></div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="data-text" style="margin-bottom:1.5rem; opacity:0.5; letter-spacing:0.25em;">SYSTEM_INIT // MOTIONMAGIC CAM (GY)</div>
+    <div class="loader-bar-track">
+      <div class="loader-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="navbar">
+    <a href="/eventlabs/" class="logo" aria-label="Event Labs Guyana">
+      <img src="/Company%20Logo/Lenscape%20Guyana/Event%20Lab%20Logo%201%20Cropped.png" alt="Event Labs Guyana" class="logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/eventlabs/">[00] HOME</a>
+      <a href="/eventlabs/#services">[01] SERVICES</a>
+      <a href="/eventlabs/portfolio.html">[02] PORTFOLIO</a>
+      <a href="/eventlabs/contact.html">[03] CONTACT</a>
+      <button class="btn-nav-book book-now-btn hover-target">BOOK NOW</button>
+    </div>
+    <div class="nav-mobile-actions">
+      <button class="btn-nav-book-mobile book-now-btn">BOOK</button>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="toggle-icon">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </span>
+        <span class="toggle-label">MENU</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Menu">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <span class="data-text mobile-sys-tag">[SYS.NAV // EVENT LABS GY]</span>
+      </div>
+      <button class="mobile-nav-close" aria-label="Close Navigation Menu">✕</button>
+    </div>
+    
+    <div class="mobile-nav-content">
+      <nav class="mobile-nav-links">
+        <a href="/eventlabs/" class="mobile-nav-item">
+          <span class="mobile-nav-idx">00</span>
+          <span class="mobile-nav-text">HOME</span>
+        </a>
+        <a href="/eventlabs/#services" class="mobile-nav-item">
+          <span class="mobile-nav-idx">01</span>
+          <span class="mobile-nav-text">SERVICES</span>
+        </a>
+        <a href="/eventlabs/portfolio.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">02</span>
+          <span class="mobile-nav-text">PORTFOLIO</span>
+        </a>
+        <a href="/eventlabs/motionmagic.html" class="mobile-nav-item active">
+          <span class="mobile-nav-idx">03</span>
+          <span class="mobile-nav-text">MOTIONMAGIC</span>
+        </a>
+        <a href="/eventlabs/contact.html" class="mobile-nav-item">
+          <span class="mobile-nav-idx">04</span>
+          <span class="mobile-nav-text">CONTACT</span>
+        </a>
+      </nav>
+
+      <div class="mobile-drawer-cta">
+        <button class="btn-primary mobile-drawer-book book-now-btn">
+          <span>BOOK PRODUCTION NOW →</span>
+        </button>
+      </div>
+
+      <div class="mobile-drawer-portal">
+        <div class="mobile-portal-label">[ REGIONAL ENTITY ]</div>
+        <a href="/motionmagic.html" class="mobile-portal-link">
+          <div class="mobile-portal-left">
+            <span class="portal-dot portal-dot-tt"></span>
+            <span class="mobile-portal-name">LENSCAPE TRINIDAD &amp; TOBAGO</span>
+          </div>
+          <span class="mobile-portal-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="mobile-drawer-footer">
+        <div class="mobile-footer-meta">
+          <div>GEORGETOWN, GUYANA</div>
+          <a href="tel:+592225LABS">+592 225-LABS</a>
+        </div>
+        <div class="mobile-footer-status">ONLINE // 2026</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SCROLL IMAGE SEQUENCE HERO -->
+  <section id="hero-scroll" class="hero-scroll-container">
+    <div class="hero-sticky">
+      <canvas id="hero-canvas"></canvas>
+
+      <!-- Main Hero Overlay -->
+      <div class="hero-overlay main-hero">
+
+        <div class="hero-top">
+          <div class="telemetry-feed data-text">
+            <span>[SYSTEM] PROTOCOL: MOTIONMAGIC-GY</span>
+            <span>LOCATION: GEORGETOWN, GY</span>
+            <span class="timestamp" id="hero-time"></span>
+          </div>
+        </div>
+
+        <div class="hero-center">
+          <h1 class="drama-text split-text">Motion<br>Magic<br>Cam.</h1>
+          <p class="hero-subtext">The immersive 360° video booth — now activating premier events, brand launches, and entertainment in Guyana.</p>
+        </div>
+
+        <div class="hero-bottom">
+          <div class="scroll-indicator data-text">↓ SCROLL TO EXPLORE</div>
+        </div>
+
+      </div>
+
+      <!-- Basic Package Overlay -->
+      <div class="package-overlay basic-package" id="basic-package">
+        <div class="package-content">
+          <div class="data-text package-label">// SYSTEM_LEVEL_01</div>
+          <h2 class="drama-text">BASIC PACKAGE</h2>
+          <div class="package-grid">
+            <div class="pricing">
+              <ul class="data-text">
+                <li>2HRS: $120,000 GYD</li>
+                <li>3HRS: $150,000 GYD</li>
+                <li>4HRS: $180,000 GYD</li>
+                <li>5HRS: $210,000 GYD</li>
+                <li>TRANSPORT: $10,000 GYD</li>
+              </ul>
+            </div>
+            <div class="includes">
+              <div class="data-text label">INCLUDES:</div>
+              <ul>
+                <li>Booth</li>
+                <li>(3) Presets [arm pathways]</li>
+                <li>(2) Operators</li>
+                <li>Digital sharing (Airdrop, email, QR, SMS)</li>
+                <li>Props (if required)</li>
+                <li>2-light setup (fill light)</li>
+                <li>Unlimited videos</li>
+                <li>Custom Overlay</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glam Package Overlay -->
+      <div class="package-overlay glam-package" id="glam-package">
+        <div class="package-content">
+          <div class="data-text package-label">// SYSTEM_LEVEL_02</div>
+          <h2 class="drama-text">GLAM PACKAGE</h2>
+          <div class="package-grid">
+            <div class="pricing">
+              <ul class="data-text">
+                <li>2HRS: $160,000 GYD</li>
+                <li>3HRS: $195,000 GYD</li>
+                <li>4HRS: $230,000 GYD</li>
+                <li>5HRS: $265,000 GYD</li>
+                <li>TRANSPORT: $10,000 GYD</li>
+              </ul>
+            </div>
+            <div class="includes">
+              <div class="data-text label">INCLUDES:</div>
+              <ul>
+                <li>Booth</li>
+                <li>(5) Presets [arm pathways]</li>
+                <li>(2) Operators</li>
+                <li>Digital sharing (Airdrop, email, QR, SMS)</li>
+                <li>Props (if required)</li>
+                <li>Complete Lighting (2 fill + backlight + spotlight)</li>
+                <li>Unlimited videos</li>
+                <li>Custom Overlay</li>
+                <li>(4–6) Stanchions</li>
+                <li>(3) Camera Effects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOOTH SHOWCASE -->
+  <section class="booth-section">
+    <div class="booth-header">
+      <div>
+        <div class="section-label">THE EXPERIENCE</div>
+        <h2 class="drama-text section-title">Choose Your<br>Tier.</h2>
+      </div>
+      <p style="max-width:420px; color:var(--text-muted); font-size:1rem; line-height:1.85;">
+        Every event deserves a different level of production. From private VIP gatherings to full stadium and corporate brand activations —
+        we have a tier built for you in Guyana.
+      </p>
+    </div>
+
+    <div class="booth-grid">
+
+      <!-- Tier 1: Basic -->
+      <div class="booth-card tier-basic">
+        <div class="booth-card-bg"></div>
+        <div class="booth-card-overlay"></div>
+        <div class="booth-card-content">
+          <div class="booth-tier-label">SYS.01 // ENTRY TIER</div>
+          <h3 class="drama-text">Basic</h3>
+          <p>Perfect for birthdays, weddings, and corporate events. Clean, professional, and instantly shareable.</p>
+          <div class="booth-price">FROM GYD $120,000 / 2HRS</div>
+          <ul class="booth-features">
+            <li>3 arm pathway presets</li>
+            <li>2 professional operators</li>
+            <li>Digital sharing: Airdrop, QR, SMS, email</li>
+            <li>2-light fill setup</li>
+            <li>Unlimited video sessions</li>
+            <li>Custom branded overlay</li>
+            <li>Props on request</li>
+          </ul>
+          <button class="btn-ghost book-now-btn hover-target" style="margin-top:2rem;">BOOK BASIC →</button>
+        </div>
+      </div>
+
+      <!-- Tier 2: Glam -->
+      <div class="booth-card tier-glam">
+        <div class="booth-card-bg"></div>
+        <div class="booth-card-overlay"></div>
+        <div class="booth-card-content">
+          <div class="booth-tier-label">SYS.02 // PREMIUM TIER</div>
+          <h3 class="drama-text">Glam</h3>
+          <p>Elevated lighting, more arm paths, and premium camera effects for high-end galas and luxury events.</p>
+          <div class="booth-price">FROM GYD $160,000 / 2HRS</div>
+          <ul class="booth-features">
+            <li>5 arm pathway presets</li>
+            <li>2 professional operators</li>
+            <li>Full lighting rig: fill + backlight + spotlight</li>
+            <li>3 cinematic camera effects</li>
+            <li>4–6 stanchions for crowd management</li>
+            <li>Unlimited video sessions</li>
+            <li>Custom branded overlay</li>
+          </ul>
+          <button class="btn-ghost book-now-btn hover-target" style="margin-top:2rem;">BOOK GLAM →</button>
+        </div>
+      </div>
+
+      <!-- Tier 3: Creative/Custom -->
+      <div class="booth-card tier-custom">
+        <div class="booth-card-bg"></div>
+        <div class="booth-card-overlay"></div>
+        <div class="booth-card-content">
+          <div class="booth-tier-label">SYS.03 // CREATIVE TIER</div>
+          <h3 class="drama-text" style="color:var(--accent);">Custom</h3>
+          <p>Bespoke arm choreography, brand campaigns, and production-level shoots. Premium pricing — completely tailored to you.</p>
+          <div class="booth-price">CUSTOM QUOTE</div>
+          <ul class="booth-features">
+            <li>Fully choreographed arm path sequences</li>
+            <li>Brand-specific camera programming</li>
+            <li>Full production crew available</li>
+            <li>Multi-angle setup options</li>
+            <li>Extended sessions available</li>
+            <li>Creative director consultation included</li>
+          </ul>
+          <button class="btn-primary book-now-btn hover-target" style="margin-top:2rem;"><span>GET A QUOTE →</span></button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Booth CTA -->
+    <div class="booth-cta">
+      <div class="section-label">READY TO BOOK?</div>
+      <h3 class="drama-text">Every event deserves<br>its moment.</h3>
+      <p style="color:var(--text-muted); font-size:1rem; max-width:40ch; line-height:1.85;">
+        Fill out our booking request and the Event Labs Guyana team will confirm your slot within 24 hours.
+        Minimum 2-hour booking. Transport available at +GYD $10,000 in Georgetown &amp; Demerara.
+      </p>
+      <button class="btn-primary book-now-btn hover-target" style="margin-top:0.5rem;">
+        <span>BOOK THE BOOTH →</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ — MOTIONMAGIC CAM
+       ============================================================ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+
+      <div class="faq-header">
+        <div class="section-label">FREQUENTLY ASKED QUESTIONS</div>
+        <h2 class="drama-text section-title">Everything You<br>Need to Know.</h2>
+      </div>
+
+      <div class="faq-columns">
+
+        <!-- COLUMN 1: About the Cam -->
+        <div class="faq-col">
+          <div class="faq-col-label data-text">// ABOUT THE CAM</div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>What is a Glambot?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>It is a robotic arm equipped with a mirrorless camera or GoPro (e.g., Sony, GoPro) that moves rapidly and precisely to film guests, often in high-speed, 240-frame-per-second slow motion &mdash; giving them a &ldquo;red carpet&rdquo; experience.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>What space is needed?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>A minimum 10&times;10 ft area is required for safe operation and optimal movement of the robotic arm.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>How does it work?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>The robot is pre-programmed with various paths, allowing it to swoop in and out around a guest within seconds &mdash; capturing every angle in dramatic slow motion.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>How long does setup take?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>A full initialization and setup takes approximately 30 minutes. We recommend scheduling our arrival at least 45 minutes before your event begins.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>What are the power requirements?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>A standard 3-prong, 110-volt, 60 Hz outlet is required. The floor surface must be solid, level, and secure for safe arm operation.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 2: Rental & Service -->
+        <div class="faq-col">
+          <div class="faq-col-label data-text">// RENTAL &amp; SERVICE INFO</div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>What is included in a rental?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Rental services include the robot arm, a professional operator, lighting setup, and digital delivery of the videos. Props and additional lighting vary by package tier.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>How is the video delivered?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Footage is sent to guests instantly via SMS, Email, QR code, or AirDrop &mdash; so they can share to social media in seconds.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>Is transport included?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Transport is available at a flat fee of GYD $10,000 within Georgetown and Demerara-Mahaica. For Linden, Berbice, Bartica, or interior locations, custom transport arrangements are provided.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>What is the minimum booking duration?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>All bookings require a minimum of 2 hours. This ensures every guest has the time and attention they deserve for their moment in the spotlight.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question hover-target" aria-expanded="false">
+              <span>Can I get a custom arm path or overlay?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes &mdash; with our Creative/Custom tier, we program fully bespoke arm choreography and brand-specific overlays. Contact us to discuss your vision and get a tailored quote.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <a href="/eventlabs/" class="logo" aria-label="Event Labs Guyana">
+      <img src="/Company%20Logo/Lenscape%20Guyana/Event%20Lab%20Logo%203.png" alt="Event Labs Guyana" class="logo-img" />
+    </a>
+    <div class="footer-legal">© 2026 EVENT LABS GUYANA. A LENSCAPE COMPANY.</div>
+    <div class="data-text" style="opacity:0.35; font-size:0.58rem;">MOTIONMAGIC CAM // EVNTLB-GY.03</div>
+  </footer>
+
+  <script type="module" src="/motionmagic.js"></script>
+</body>
+
+</html>
