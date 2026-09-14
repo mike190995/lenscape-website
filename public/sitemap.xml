@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage -->
+  <url>
+    <loc>https://lenscapecompany.com/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/"/>
+  </url>
+  <url>
+    <loc>https://lenscapecompany.com/eventlabs/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/"/>
+  </url>
+
+  <!-- Portfolio -->
+  <url>
+    <loc>https://lenscapecompany.com/portfolio.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/portfolio.html"/>
+  </url>
+  <url>
+    <loc>https://lenscapecompany.com/eventlabs/portfolio.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/portfolio.html"/>
+  </url>
+
+  <!-- MotionMagic Cam -->
+  <url>
+    <loc>https://lenscapecompany.com/motionmagic.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/motionmagic.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/motionmagic.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/motionmagic.html"/>
+  </url>
+  <url>
+    <loc>https://lenscapecompany.com/eventlabs/motionmagic.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/motionmagic.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/motionmagic.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/motionmagic.html"/>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://lenscapecompany.com/contact.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/contact.html"/>
+  </url>
+  <url>
+    <loc>https://lenscapecompany.com/eventlabs/contact.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-TT" href="https://lenscapecompany.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GY" href="https://lenscapecompany.com/eventlabs/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lenscapecompany.com/contact.html"/>
+  </url>
+</urlset>

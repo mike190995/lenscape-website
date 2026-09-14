@@ -11,6 +11,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal, openBookingModal } from './booking.js'
 import { PORTFOLIO_PROJECTS, PORTFOLIO_CATEGORIES, getPortfolioProjects } from './portfolio-data.js'
 import './mobile-nav.js'
+import { resolveMediaUrl } from './media-config.js'
+import { trackPortfolioView } from './telemetry.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -295,6 +297,9 @@ function openPhotoLightbox(project, startIndex = 0) {
 
   if (!modal || !project.photos || project.photos.length === 0) return
 
+  // Telemetry track
+  trackPortfolioView(project, 'album_lightbox')
+
   // Stop background smooth scroll
   window.lenis?.stop()
 
@@ -418,9 +423,12 @@ function openVideoModal(project) {
   if (formatEl) formatEl.textContent = `${project.aspect || '16:9'} · High Definition Master`
   if (descEl) descEl.textContent = project.desc
 
-  videoEl.src = project.videoSrc
+  videoEl.src = resolveMediaUrl(project.videoSrc)
   videoEl.currentTime = 0
   modal.classList.add('open')
+
+  // Telemetry track
+  trackPortfolioView(project, 'video_modal')
 
   videoEl.play().catch(() => {})
 }

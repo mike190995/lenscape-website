@@ -8,6 +8,7 @@
  */
 
 import { validateDuration, calculatePrice, submitBooking, fetchBookedDates } from './booking-logic.js'
+import { trackBookingStep, trackBookingSubmission } from './telemetry.js'
 
 // ============================================================
 // STATE
@@ -96,7 +97,7 @@ function createModalHTML(config = bookingConfig) {
         <div class="modal-step" id="modal-step-2">
           <form id="booking-form" novalidate>
 
-            <!-- Event Info -->
+            <!-- Contact & Client Info -->
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="field-client-name">Your Name *</label>
@@ -105,9 +106,24 @@ function createModalHTML(config = bookingConfig) {
                 <div class="field-error" id="err-client-name">Please enter your name.</div>
               </div>
               <div class="form-group">
+                <label class="form-label" for="field-client-email">Email Address *</label>
+                <input class="form-input" type="email" id="field-client-email" name="clientEmail"
+                  placeholder="name@example.com" required autocomplete="email" />
+                <div class="field-error" id="err-client-email">Please enter a valid email address.</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="field-client-phone">Phone / WhatsApp *</label>
+                <input class="form-input" type="tel" id="field-client-phone" name="clientPhone"
+                  placeholder="e.g. +1 (868) 000-0000" required autocomplete="tel" />
+                <div class="field-error" id="err-client-phone">Please enter your contact phone number.</div>
+              </div>
+              <div class="form-group">
                 <label class="form-label" for="field-event-name">Event Name *</label>
                 <input class="form-input" type="text" id="field-event-name" name="eventName"
-                  placeholder="e.g. Sweet 16, Corporate Launch" required />
+                  placeholder="e.g. Sweet 16, Corporate Gala" required />
                 <div class="field-error" id="err-event-name">Please enter the event name.</div>
               </div>
             </div>
@@ -214,37 +230,45 @@ function createModalHTML(config = bookingConfig) {
               </div>
             </div>
 
-            <!-- Tier / Use Case -->
+            <!-- Photo & Video Booth Fleet Selection -->
             <div class="form-group">
-              <div class="form-label">Booking Tier *</div>
-              <div class="radio-group" id="tier-group">
-                <label class="radio-item" id="tier-basic-label">
-                  <input type="radio" name="tier" value="basic" id="tier-basic" checked />
-                  General Event (Basic)
+              <div class="form-label">Select Photo / Video Booth *</div>
+              <div class="radio-group" id="tier-group" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.5rem;">
+                <label class="radio-item" id="tier-roamer-label">
+                  <input type="radio" name="tier" value="roamer" id="tier-roamer" checked />
+                  Roamer
                 </label>
-                <label class="radio-item" id="tier-glam-label">
-                  <input type="radio" name="tier" value="glam" id="tier-glam" />
-                  Premium Event (Glam)
+                <label class="radio-item" id="tier-print-label">
+                  <input type="radio" name="tier" value="print" id="tier-print" />
+                  Print Booth
+                </label>
+                <label class="radio-item" id="tier-360-label">
+                  <input type="radio" name="tier" value="360" id="tier-360" />
+                  360 Booth
+                </label>
+                <label class="radio-item" id="tier-glambot-label">
+                  <input type="radio" name="tier" value="glambot" id="tier-glambot" />
+                  GlamBot
                 </label>
                 <label class="radio-item" id="tier-custom-label">
                   <input type="radio" name="tier" value="custom" id="tier-custom" />
-                  Creative / Custom Use
+                  Custom Quote
                 </label>
               </div>
 
-              <!-- Custom Arm Paths — revealed when Creative/Custom selected -->
+              <!-- Custom Arm Paths — revealed when GlamBot or Custom selected -->
               <div class="custom-arm-reveal" id="custom-arm-reveal">
                 <label class="custom-arm-label">
                   <input type="checkbox" name="customArmPaths" id="field-custom-arm" />
                   <div>
                     <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.4rem;">
-                      <span style="font-weight:600; color: var(--text-primary); font-size:0.92rem;">Custom Arm Paths</span>
+                      <span style="font-weight:600; color: var(--text-primary); font-size:0.92rem;">Custom Arm Choreography</span>
                       <span class="custom-arm-badge">PREMIUM</span>
                     </div>
                     <div class="custom-arm-desc">
-                      Fully choreographed, bespoke camera movement sequences designed for
-                      creative shoots, brand campaigns, and high-production events.
-                      Custom pricing applies — our team will reach out to discuss.
+                      Fully choreographed, bespoke robotic arm pathways designed for
+                      creative shoots, brand campaigns, and high-production broadcasts.
+                      Our engineering and creative team will reach out to tailor your sequence.
                     </div>
                   </div>
                 </label>
@@ -267,7 +291,7 @@ function createModalHTML(config = bookingConfig) {
                   font-size: 1.5rem;
                   font-weight: 700;
                   color: var(--accent);
-                ">${config.currency === 'GYD' ? 'GYD $120,000' : (config.currency === 'USD' ? 'USD $600' : 'TTD $3,250')}</div>
+                ">${config.currency === 'GYD' ? 'GYD $60,000' : (config.currency === 'USD' ? 'USD $300' : 'TTD $1,800')}</div>
               </div>
               <div id="price-breakdown" style="
                 font-family: var(--font-data);
@@ -468,6 +492,29 @@ function validateStep2() {
     clientName.classList.remove('invalid')
   }
 
+  // Client email
+  const clientEmail = document.getElementById('field-client-email')
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!clientEmail.value.trim() || !emailRegex.test(clientEmail.value.trim())) {
+    showError('err-client-email', true)
+    clientEmail.classList.add('invalid')
+    valid = false
+  } else {
+    showError('err-client-email', false)
+    clientEmail.classList.remove('invalid')
+  }
+
+  // Client phone
+  const clientPhone = document.getElementById('field-client-phone')
+  if (!clientPhone.value.trim()) {
+    showError('err-client-phone', true)
+    clientPhone.classList.add('invalid')
+    valid = false
+  } else {
+    showError('err-client-phone', false)
+    clientPhone.classList.remove('invalid')
+  }
+
   // Event name
   const eventName = document.getElementById('field-event-name')
   if (!eventName.value.trim()) {
@@ -525,9 +572,12 @@ function collectFormData() {
   const loc = document.getElementById('field-location')?.value || ''
   const isGuyana = bookingConfig.country === 'GY' || loc.includes('Guyana')
   const currency = isGuyana ? (bookingConfig.currency === 'USD' ? 'USD' : 'GYD') : (bookingConfig.currency || 'TTD')
+  const selectedBooth = form.querySelector('input[name="tier"]:checked')?.value || 'roamer'
 
   return {
     clientName:    document.getElementById('field-client-name').value.trim(),
+    clientEmail:   document.getElementById('field-client-email')?.value.trim() || '',
+    clientPhone:   document.getElementById('field-client-phone')?.value.trim() || '',
     eventName:     document.getElementById('field-event-name').value.trim(),
     location:      loc,
     date:          selectedDate || '',
@@ -535,7 +585,8 @@ function collectFormData() {
     endTime:       document.getElementById('field-end-time').value,
     music:         document.getElementById('field-music').value,
     addons,
-    tier:          form.querySelector('input[name="tier"]:checked')?.value || 'basic',
+    tier:          selectedBooth,
+    boothType:     selectedBooth,
     customArmPaths: document.getElementById('field-custom-arm')?.checked || false,
     notes:         document.getElementById('field-notes').value.trim(),
     country:       isGuyana ? 'GY' : 'TT',
@@ -617,7 +668,7 @@ function bindDurationFeedback() {
 // ============================================================
 // MODAL OPEN / CLOSE
 // ============================================================
-async function openModal() {
+async function openModal(e, preselectedBooth) {
   const backdrop = document.getElementById('booking-modal-backdrop')
   if (!backdrop) return
   
@@ -627,6 +678,20 @@ async function openModal() {
   backdrop.classList.add('open')
   document.body.style.overflow = 'hidden'
   goToStep(1)
+
+  // Handle preselected booth
+  const booth = preselectedBooth || (e?.currentTarget?.getAttribute ? e.currentTarget.getAttribute('data-booth') : null)
+  trackBookingStep(1, { preselected_booth: booth || 'none' })
+  if (booth) {
+    const radio = document.querySelector(`input[name="tier"][value="${booth}"]`)
+    if (radio) {
+      radio.checked = true
+      const reveal = document.getElementById('custom-arm-reveal')
+      if (reveal) {
+        reveal.classList.toggle('visible', booth === 'custom' || booth === 'glambot')
+      }
+    }
+  }
   
   // Render immediately with whatever we have (or empty)
   renderCalendar()
@@ -671,7 +736,10 @@ export function initBookingModal(options = {}) {
 
   // Bind open buttons (all .book-now-btn on page)
   document.querySelectorAll('.book-now-btn').forEach(btn => {
-    btn.addEventListener('click', openModal)
+    btn.addEventListener('click', (e) => {
+      const booth = btn.getAttribute('data-booth')
+      openModal(e, booth)
+    })
   })
 
   // Close
@@ -715,6 +783,7 @@ export function initBookingModal(options = {}) {
         return
       }
       goToStep(2)
+      trackBookingStep(2, { selected_date: selectedDate })
       bindDurationFeedback()
       updatePriceEstimate()
       bindTierChange()
@@ -732,11 +801,24 @@ export function initBookingModal(options = {}) {
       if (result.success) {
         const ref = document.getElementById('success-ref-num')
         const prefix = (formData.country === 'GY' || bookingConfig.country === 'GY') ? 'EVNTLB-GY' : 'LSC'
-        if (ref) ref.textContent = `// REF: ${prefix}-${Date.now().toString().slice(-6)}`
+        const bookingId = `${prefix}-${Date.now().toString().slice(-6)}`
+        if (ref) ref.textContent = `// REF: ${bookingId}`
+        trackBookingSubmission('success', {
+          bookingId: bookingId,
+          eventName: formData.eventName,
+          tier: formData.tier,
+          total: formData.estimatedTotal,
+          customArmPaths: formData.customArmPaths
+        })
         goToStep(3)
       } else {
         nextBtn.innerHTML = '<span>RETRY →</span>'
         nextBtn.disabled  = false
+        trackBookingSubmission('failure', {
+          eventName: formData.eventName,
+          tier: formData.tier,
+          error: result.message
+        })
         alert(result.message)
       }
     }
@@ -753,7 +835,7 @@ function bindTierChange() {
     radio.addEventListener('change', () => {
       const reveal = document.getElementById('custom-arm-reveal')
       if (reveal) {
-        reveal.classList.toggle('visible', radio.value === 'custom')
+        reveal.classList.toggle('visible', radio.value === 'custom' || radio.value === 'glambot')
       }
       updatePriceEstimate()
     })

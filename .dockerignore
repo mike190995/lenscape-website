@@ -1,4 +1,4 @@
-﻿node_modules
+node_modules
 dist
 .git
 .gitignore
@@ -8,3 +8,6 @@ README.md
 npm-debug.log
 error.log
 raw-media-archive
+Docs
+public/hero/*.png
+dist-media

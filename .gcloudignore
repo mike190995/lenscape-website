@@ -1,4 +1,4 @@
-﻿.gcloudignore
+.gcloudignore
 .git
 .gitignore
 node_modules/
@@ -7,3 +7,4 @@ dist/
 npm-debug.log
 error.log
 raw-media-archive/
+dist-media/

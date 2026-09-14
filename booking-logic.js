@@ -10,7 +10,7 @@
 // CONFIG — replace with your deployed Apps Script URL
 // ============================================================
 export const BOOKING_CONFIG = {
-  SHEETS_ENDPOINT: 'https://script.google.com/macros/s/AKfycbyVYgpu19c2b9-R3G3mcEzoC3JMKyyAEghVLb6qSX9jMX1T2kI8mFbHeEbAeo9TPEF1/exec',
+  SHEETS_ENDPOINT: import.meta.env.VITE_API_URL || 'https://us-east1-lenscape-company.cloudfunctions.net/ingestLead',
   MIN_DURATION_HOURS: 2,
   TRANSPORT_COST: 250,
   TRANSPORT_COSTS: {
@@ -19,19 +19,35 @@ export const BOOKING_CONFIG = {
     USD: 50
   },
   PRICING: {
-    basic: { 2: 3250, 3: 3750, 4: 4250, 5: 4750 },
-    glam: { 2: 4250, 3: 4750, 4: 5250, 5: 5750 },
+    roamer: { 2: 1800, 3: 2100, 4: 2250, 5: 2600 },
+    print: { 2: 3300, 3: 3750, 4: 4250, 5: 4600 },
+    '360': { 2: 1800, 3: 2100, 4: 2250, 5: 2600 },
+    glambot: { 2: 3500, 3: 4000, 4: 4500, 5: 5000 },
+    basic: { 2: 1800, 3: 2100, 4: 2250, 5: 2600 },
+    glam: { 2: 3500, 3: 4000, 4: 4500, 5: 5000 },
     TTD: {
-      basic: { 2: 3250, 3: 3750, 4: 4250, 5: 4750 },
-      glam: { 2: 4250, 3: 4750, 4: 5250, 5: 5750 }
+      roamer: { 2: 1800, 3: 2100, 4: 2250, 5: 2600 },
+      print: { 2: 3300, 3: 3750, 4: 4250, 5: 4600 },
+      '360': { 2: 1800, 3: 2100, 4: 2250, 5: 2600 },
+      glambot: { 2: 3500, 3: 4000, 4: 4500, 5: 5000 },
+      basic: { 2: 1800, 3: 2100, 4: 2250, 5: 2600 },
+      glam: { 2: 3500, 3: 4000, 4: 4500, 5: 5000 }
     },
     GYD: {
-      basic: { 2: 120000, 3: 150000, 4: 180000, 5: 210000 },
-      glam: { 2: 160000, 3: 195000, 4: 230000, 5: 265000 }
+      roamer: { 2: 60000, 3: 70000, 4: 75000, 5: 85000 },
+      print: { 2: 110000, 3: 125000, 4: 140000, 5: 155000 },
+      '360': { 2: 60000, 3: 70000, 4: 75000, 5: 85000 },
+      glambot: { 2: 120000, 3: 140000, 4: 160000, 5: 180000 },
+      basic: { 2: 60000, 3: 70000, 4: 75000, 5: 85000 },
+      glam: { 2: 120000, 3: 140000, 4: 160000, 5: 180000 }
     },
     USD: {
-      basic: { 2: 600, 3: 750, 4: 900, 5: 1050 },
-      glam: { 2: 800, 3: 975, 4: 1150, 5: 1325 }
+      roamer: { 2: 300, 3: 350, 4: 375, 5: 425 },
+      print: { 2: 550, 3: 625, 4: 700, 5: 775 },
+      '360': { 2: 300, 3: 350, 4: 375, 5: 425 },
+      glambot: { 2: 600, 3: 700, 4: 800, 5: 900 },
+      basic: { 2: 300, 3: 350, 4: 375, 5: 425 },
+      glam: { 2: 600, 3: 700, 4: 800, 5: 900 }
     }
   }
 }
@@ -171,12 +187,15 @@ export function buildPayload(formData) {
     territory: isGuyana ? 'Guyana' : 'Trinidad & Tobago',
     currency: raw.currency || (isGuyana ? 'GYD' : 'TTD'),
     clientName: sanitize(raw.clientName),
+    clientEmail: sanitize(raw.clientEmail || raw.email),
+    clientPhone: sanitize(raw.clientPhone || raw.phone),
     eventName: sanitize(raw.eventName),
     date: raw.date || '',
     location: sanitize(raw.location),
     timeSlot: raw.startTime && raw.endTime ? `${raw.startTime} – ${raw.endTime}` : '',
     addons: Array.isArray(raw.addons) ? raw.addons.join(', ') : (raw.addons || ''),
-    tier: raw.tier || 'basic',
+    tier: raw.tier || 'roamer',
+    boothType: raw.tier || raw.boothType || 'roamer',
     music: sanitize(raw.music),
     notes: sanitize(raw.notes),
     isPremium: false,
@@ -202,37 +221,51 @@ function sanitize(str) {
  * @returns {Promise<{ success: boolean, message: string }>}
  */
 export async function submitBooking(formData) {
-  const payload = buildPayload(formData)
+  const rawPayload = buildPayload(formData)
 
-  console.log('[Lenscape Booking] Payload:', payload)
-
-  // Stub mode — no endpoint configured yet
-  if (
-    !BOOKING_CONFIG.SHEETS_ENDPOINT ||
-    BOOKING_CONFIG.SHEETS_ENDPOINT.includes('YOUR_DEPLOYMENT_ID')
-  ) {
-    console.warn('[Lenscape Booking] Running in STUB MODE. Configure SHEETS_ENDPOINT to enable live sync.')
-    await fakeDelay(1200)
-    return {
-      success: true,
-      message: 'Booking request received (stub mode). Configure the Google Apps Script endpoint to enable live sync.',
-      payload
-    }
+  const gcfPayload = {
+    form_type: 'booking_wizard',
+    market: rawPayload.territory === 'Guyana' ? 'GY' : 'TT',
+    client: {
+      name: rawPayload.clientName,
+      email: rawPayload.clientEmail,
+      phone: rawPayload.clientPhone
+    },
+    payload: {
+      event_name: rawPayload.eventName,
+      date: rawPayload.date,
+      location: rawPayload.location,
+      time_slot: rawPayload.timeSlot,
+      addons: rawPayload.addons,
+      tier: rawPayload.tier,
+      notes: rawPayload.notes,
+      is_premium: rawPayload.isPremium,
+      custom_arm_paths: rawPayload.customArmPaths,
+      estimated_total: formData.estimatedTotal || 0
+    },
+    path: window.location.pathname
   }
+
+  console.log('[Lenscape Booking] Ingesting Lead via:', BOOKING_CONFIG.SHEETS_ENDPOINT, gcfPayload)
 
   try {
     const res = await fetch(BOOKING_CONFIG.SHEETS_ENDPOINT, {
       method: 'POST',
-      mode: 'no-cors', // Apps Script requires no-cors
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(gcfPayload)
     })
 
-    // no-cors mode always returns opaque response; assume success if no throw
+    if (!res.ok) {
+      throw new Error(`HTTP Error ${res.status}`)
+    }
+
+    const resData = await res.json()
+    console.log('[Lenscape Booking] Success:', resData)
+
     return {
       success: true,
       message: 'Your booking request has been submitted. The Lenscape team will review and confirm within 24 hours.',
-      payload
+      payload: rawPayload
     }
   } catch (err) {
     console.error('[Lenscape Booking] Submission error:', err)

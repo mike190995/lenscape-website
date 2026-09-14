@@ -593,22 +593,6 @@ const digitalProjects = [
     coverFile: 'General Content/STORIES_2.webp',
     highRes: '/Portfolio/Our%20Work/General%20Content/STORIES_2.png',
     desc: 'Dynamic seasonal social story promotion celebrating Carnival sweetness with Popeyes Chocolate Chip Biscuits.'
-  },
-  {
-    id: 'the-nook-outdoor-living',
-    title: 'The Nook - Outdoor Living & Furniture Catalog',
-    client: 'The Nook Home & Living',
-    category: 'digital',
-    secondaryCategories: ['branding'],
-    subCategory: 'Product Catalog & Social Ad Suite',
-    year: '2024',
-    badge: 'PRODUCT CATALOG',
-    aspectRatio: '4-5',
-    type: 'image',
-    format: 'Product Catalog & Social Ad Suite',
-    coverFile: 'General Content/PATIO.webp',
-    highRes: '/Portfolio/Our%20Work/General%20Content/PATIO.png',
-    desc: 'Elegant social catalog and promotional flyer suite showcasing designer patio furniture and egg baskets.'
   }
 ];
 
@@ -670,12 +654,12 @@ digitalProjects.forEach(dig => {
 // Output code
 const outputContent = `/**
  * LENSCAPE - MASTER PORTFOLIO DATA REGISTRY (WEBP & TRUE ASPECT RATIOS)
- * Comprehensive data catalog containing 37 curated works:
+ * Comprehensive data catalog containing 36 curated works:
  * - 12 Event Photo Albums (177 high-res photos)
  * - 11 Commercial Video Broadcasts & Social Motion Ads
  * - 5 MotionMagic Cam (Robotic Arm) & 360 Booth Outputs
  * - 5 Branding & Large-Format Outdoor Print Assets
- * - 4 Digital & Multi-Platform Social Campaigns
+ * - 3 Digital & Multi-Platform Social Campaigns
  */
 
 export const PORTFOLIO_CATEGORIES = {

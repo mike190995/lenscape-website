@@ -9,6 +9,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
 import './mobile-nav.js'
+import { trackContactSubmit, trackChannelClick } from './telemetry.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -26,8 +27,8 @@ if (isEventLabs) {
 // ============================================================
 // CONFIG — same Google Apps Script endpoint pattern
 // ============================================================
-const CONTACT_ENDPOINT = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec'
-const STUB_MODE = CONTACT_ENDPOINT.includes('YOUR_DEPLOYMENT_ID')
+const CONTACT_ENDPOINT = import.meta.env.VITE_API_URL || 'https://us-east1-lenscape-company.cloudfunctions.net/ingestLead'
+const STUB_MODE = false
 
 // ============================================================
 // LOADER
@@ -106,35 +107,42 @@ async function submitContactForm(e) {
   btn.disabled  = true
   if (status) { status.className = 'contact-form-status'; status.textContent = '' }
 
-  const payload = {
-    timestamp: new Date().toISOString(),
-    type:      'contact_enquiry',
-    name:      document.getElementById('cf-name')?.value.trim(),
-    email:     document.getElementById('cf-email')?.value.trim(),
-    phone:     document.getElementById('cf-phone')?.value.trim(),
-    subject:   document.getElementById('cf-subject')?.value,
-    budget:    document.getElementById('cf-budget')?.value || 'Not specified',
-    message:   document.getElementById('cf-message')?.value.trim(),
+  const gcfPayload = {
+    form_type: 'contact_form',
+    market: isEventLabs ? 'GY' : 'TT',
+    client: {
+      name: document.getElementById('cf-name')?.value.trim(),
+      email: document.getElementById('cf-email')?.value.trim(),
+      phone: document.getElementById('cf-phone')?.value.trim()
+    },
+    payload: {
+      subject: document.getElementById('cf-subject')?.value,
+      budget: document.getElementById('cf-budget')?.value || 'Not specified',
+      message: document.getElementById('cf-message')?.value.trim()
+    },
+    path: window.location.pathname
   }
 
-  console.log('[Lenscape Contact] Payload:', payload)
+  console.log('[Lenscape Contact] Ingesting Lead via:', CONTACT_ENDPOINT, gcfPayload)
 
   try {
-    if (STUB_MODE) {
-      // Stub: simulate network delay
-      await new Promise(r => setTimeout(r, 1200))
-      showSuccess(status, btn)
-    } else {
-      await fetch(CONTACT_ENDPOINT, {
-        method:  'POST',
-        mode:    'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload)
-      })
-      showSuccess(status, btn)
+    const response = await fetch(CONTACT_ENDPOINT, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(gcfPayload)
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP Error ${response.status}`)
     }
+
+    const resData = await response.json()
+    console.log('[Lenscape Contact] Success:', resData)
+    trackContactSubmit('success', gcfPayload.payload.subject)
+    showSuccess(status, btn)
   } catch (err) {
     console.error('[Lenscape Contact] Error:', err)
+    trackContactSubmit('failure', gcfPayload.payload.subject)
     btn.innerHTML = '<span>SEND MESSAGE →</span>'
     btn.disabled  = false
     if (status) {
@@ -273,4 +281,13 @@ function initPage() {
 
   // --- Booking Modal ---
   initBookingModal()
+
+  // --- Channel Click Telemetry ---
+  document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"], a[href*="whatsapp"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href') || ''
+      const channel = href.startsWith('tel:') ? 'phone' : 'whatsapp'
+      trackChannelClick(channel, href)
+    })
+  })
 }

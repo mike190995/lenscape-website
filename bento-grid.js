@@ -15,6 +15,12 @@
  */
 
 import { fetchBookedDates, validateDuration, submitBooking } from './booking-logic.js'
+import { resolveMediaUrl } from './media-config.js'
+import { 
+  trackBentoCardClick, 
+  trackShowreelEngagement, 
+  trackScoperDrawer 
+} from './telemetry.js'
 
 // ============================================================
 // STATE
@@ -256,16 +262,20 @@ function switchOverlayMedia(item, itemIndex, tabsContainer) {
 
   currentOverlayItemIndex = itemIndex;
 
+  // Track showreel engagement
+  trackShowreelEngagement(item.label, item.src, currentOverlayService);
+
   if (item.type === 'video') {
     if (img) img.style.display = 'none';
     if (video) {
       video.style.display = 'block';
       video.style.objectPosition = item.pos || 'center 18%';
-      video.poster = item.poster || '';
+      video.poster = resolveMediaUrl(item.poster) || '';
       
+      const resolvedSrc = resolveMediaUrl(item.src);
       const currentSrc = video.currentSrc || video.src;
-      if (!currentSrc || !currentSrc.endsWith(encodeURI(item.src)) && !currentSrc.endsWith(item.src)) {
-        video.src = item.src;
+      if (!currentSrc || !currentSrc.endsWith(encodeURI(resolvedSrc)) && !currentSrc.endsWith(resolvedSrc)) {
+        video.src = resolvedSrc;
         video.load();
       }
       video.muted = true;
@@ -303,6 +313,8 @@ function initFlowA() {
     card.addEventListener('click', (e) => {
       e.preventDefault();
       const service = card.getAttribute('data-modal-service') || 'photo-video';
+      const cardTitle = card.querySelector('.bento-title')?.textContent?.trim() || service;
+      trackBentoCardClick(card.className.split(' ')[0], cardTitle, 'Flow A');
       openFlowAOverlay(service);
     });
   });
@@ -586,6 +598,7 @@ function initFlowB() {
 
   card3.addEventListener('click', (e) => {
     e.preventDefault();
+    trackBentoCardClick('bento-card-3', 'Strategic Branding', 'Flow B');
     
     // Check if portfolio showcase exists on current page
     const showcase = document.getElementById('portfolio-showcase');
@@ -646,6 +659,8 @@ function initFlowC() {
   triggers.forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
+      const cardTitle = card.querySelector('.bento-title')?.textContent?.trim() || 'Digital Solution';
+      trackBentoCardClick(card.className.split(' ')[0], cardTitle, 'Flow C');
       openFlowCDrawer();
     });
   });
@@ -661,11 +676,12 @@ function initFlowC() {
   // Interactive Project Scoper Form
   const form = document.getElementById('project-scoper-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const name = document.getElementById('scoper-name')?.value.trim();
       const email = document.getElementById('scoper-email')?.value.trim();
+      const budget = document.getElementById('scoper-budget')?.value || '';
       
       if (!name || !email) {
         alert('Please fill in your name and email address.');
@@ -678,22 +694,79 @@ function initFlowC() {
         submitBtn.textContent = 'SUBMITTING BRIEF...';
       }
 
-      setTimeout(() => {
+      // Collect selected capabilities
+      const selectedCapabilities = [];
+      const checkboxes = form.querySelectorAll('.scoper-checkboxes input[type="checkbox"]:checked');
+      checkboxes.forEach(cb => selectedCapabilities.push(optOutHtml(cb.value)));
+
+      const isEventLabs = window.location.pathname.includes('/eventlabs') || document.body.classList.contains('eventlabs');
+      const apiEndpoint = import.meta.env.VITE_API_URL || 'https://us-east1-lenscape-company.cloudfunctions.net/ingestLead';
+
+      const gcfPayload = {
+        form_type: 'project_scoper',
+        market: isEventLabs ? 'GY' : 'TT',
+        client: {
+          name: name,
+          email: email
+        },
+        payload: {
+          capabilities: selectedCapabilities.join(', '),
+          budget: budget
+        },
+        path: window.location.pathname
+      };
+
+      console.log('[Lenscape Project Scoper] Submitting payload:', apiEndpoint, gcfPayload);
+
+      try {
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(gcfPayload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error ${response.status}`);
+        }
+
+        const resData = await response.json();
+        const briefId = resData.lead_id || `DIG-${Date.now().toString().slice(-6)}`;
+
+        trackScoperDrawer('submit', {
+          brief_id: briefId,
+          name_present: Boolean(name),
+          email_present: Boolean(email)
+        });
+
         form.style.display = 'none';
         const successState = document.getElementById('scoper-success');
         if (successState) {
           successState.style.display = 'block';
-          document.getElementById('scoper-ref').textContent = `// BRIEF-ID: DIG-${Date.now().toString().slice(-6)}`;
+          document.getElementById('scoper-ref').textContent = `// BRIEF-ID: ${briefId}`;
         }
-      }, 1000);
+      } catch (err) {
+        console.error('[Lenscape Project Scoper] Submission failed:', err);
+        alert('Submission failed. Please check your connection and try again.');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'SUBMIT PROJECT BRIEF →';
+        }
+      }
     });
   }
+}
+
+function optOutHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[<>]/g, '');
 }
 
 function openFlowCDrawer() {
   const drawer = document.getElementById('slide-out-drawer');
   const backdrop = document.getElementById('drawer-backdrop');
   if (!drawer) return;
+
+  trackScoperDrawer('open');
 
   drawer.scrollTop = 0;
   drawer.classList.add('open');

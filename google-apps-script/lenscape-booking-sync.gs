@@ -1,4 +1,4 @@
-﻿/**
+/**
  * =========================================================================
  * LENSCAPE — DUAL SYNC GOOGLE SHEETS & GOOGLE CALENDAR APPS SCRIPT
  * =========================================================================
@@ -51,13 +51,13 @@ function doPost(e) {
 
     const timestamp = payload.timestamp || new Date().toISOString();
     const clientName = payload.clientName || 'Unnamed Client';
-    const email = payload.email || 'N/A';
-    const phone = payload.phone || 'N/A';
+    const email = payload.clientEmail || payload.email || 'N/A';
+    const phone = payload.clientPhone || payload.phone || 'N/A';
     const eventName = payload.eventName || 'Client Event';
     const dateStr = payload.date || ''; // "YYYY-MM-DD"
     const location = payload.location || 'Trinidad';
     const timeSlot = payload.timeSlot || (payload.startTime && payload.endTime ? `${payload.startTime} – ${payload.endTime}` : 'TBD');
-    const tier = payload.tier || payload.service || 'Standard';
+    const boothType = (payload.boothType || payload.tier || payload.service || 'Roamer').toUpperCase();
     const addons = payload.addons || 'None';
     const music = payload.music || 'N/A';
     const notes = payload.notes || '';
@@ -80,7 +80,7 @@ function doPost(e) {
         endTime: payload.endTime,
         timeSlot: timeSlot,
         location: location,
-        tier: tier,
+        tier: boothType,
         addons: addons,
         music: music,
         notes: notes,
@@ -104,7 +104,7 @@ function doPost(e) {
       dateStr: dateStr,
       timeSlot: timeSlot,
       location: location,
-      tier: tier,
+      tier: boothType,
       addons: addons,
       music: music,
       price: price,

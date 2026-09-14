@@ -11,6 +11,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
 import { initBentoGrid } from './bento-grid.js'
 import './mobile-nav.js'
+import './telemetry.js'
+import { trackChannelClick } from './telemetry.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -269,4 +271,13 @@ function initInteractions() {
   // --- Booking Modal & Bento Grid ---
   initBookingModal()
   initBentoGrid()
+
+  // --- Channel Click Telemetry ---
+  document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"], a[href*="whatsapp"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href') || ''
+      const channel = href.startsWith('tel:') ? 'phone' : 'whatsapp'
+      trackChannelClick(channel, href)
+    })
+  })
 }

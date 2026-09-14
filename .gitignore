@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 raw-media-archive/
+dist-media/
 
 # Editor directories and files
 .vscode/*

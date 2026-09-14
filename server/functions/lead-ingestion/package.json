@@ -1,0 +1,13 @@
+{
+  "name": "lead-ingestion",
+  "version": "1.0.0",
+  "description": "Lenscape serverless lead ingestion endpoint",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/firestore": "^7.10.0",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

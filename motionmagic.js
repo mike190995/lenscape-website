@@ -9,6 +9,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
 import './mobile-nav.js'
+import './telemetry.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -23,23 +24,40 @@ if (isEventLabs) {
   document.documentElement.style.setProperty('--accent-magenta', '#D32C87')
 }
 
-// --- Image Sequence Setup ---
+// --- Image Sequence Setup (Optimized WebP Pipeline) ---
 const frameCount = 177
-const images     = []
-let imagesLoaded = 0
+const CRITICAL_FRAMES = 25 // Unblock preloader with first 25 frames (~500KB)
+const images     = new Array(frameCount)
+let criticalLoaded = 0
 
 const currentFrame = index =>
-  `/hero/lenscape glambot_17902106327947948917_sample_${(1000 + index).toString()}.png`
+  `/hero/lenscape glambot_17902106327947948917_sample_${(1000 + index).toString()}.webp`
+
+function loadSingleFrame(index) {
+  return new Promise(resolve => {
+    const img = new Image()
+    img.onload = () => { images[index] = img; resolve(img) }
+    img.onerror = () => { images[index] = img; resolve(img) }
+    img.src = currentFrame(index)
+  })
+}
 
 function preloadImages() {
   return new Promise(resolve => {
-    for (let i = 0; i < frameCount; i++) {
-      const img    = new Image()
-      img.onload  = () => { if (++imagesLoaded === frameCount) resolve() }
-      img.onerror = () => { if (++imagesLoaded === frameCount) resolve() }
-      img.src      = currentFrame(i)
-      images.push(img)
+    // 1. Preload critical initial frames to unblock loader rapidly
+    const criticalPromises = []
+    for (let i = 0; i < CRITICAL_FRAMES; i++) {
+      criticalPromises.push(loadSingleFrame(i))
     }
+
+    Promise.all(criticalPromises).then(() => {
+      resolve() // Dismiss loader!
+      
+      // 2. Stream remaining frames in background
+      for (let i = CRITICAL_FRAMES; i < frameCount; i++) {
+        loadSingleFrame(i)
+      }
+    })
   })
 }
 
@@ -47,7 +65,7 @@ Promise.all([document.fonts.ready, preloadImages()]).then(() => {
   const loader = document.getElementById('loader')
   gsap.to(loader, {
     yPercent:  -100,
-    duration:  1.2,
+    duration:  1.0,
     ease:      'power4.inOut',
     onComplete: initInteractions
   })
@@ -80,21 +98,15 @@ function initInteractions() {
   context.imageSmoothingEnabled  = true
   context.imageSmoothingQuality  = 'high'
 
-  const getIsMobile = () => window.innerWidth <= 768;
-
   const airship = {
     frame: 0,
-    x:     getIsMobile() ? 0 : window.innerWidth * 0.15,
-    y:     getIsMobile() ? 0 : window.innerHeight * 0.15
+    x:     window.innerWidth * 0.15,
+    y:     window.innerHeight * 0.15
   }
 
   function resizeCanvas() {
     canvas.width  = window.innerWidth  * window.devicePixelRatio
     canvas.height = window.innerHeight * window.devicePixelRatio
-    if (airship.frame === 0) {
-      airship.x = getIsMobile() ? 0 : window.innerWidth * 0.15
-      airship.y = getIsMobile() ? 0 : window.innerHeight * 0.15
-    }
     render()
   }
 
@@ -102,8 +114,15 @@ function initInteractions() {
   resizeCanvas()
 
   function render() {
-    if (!images[airship.frame]) return
-    const img          = images[airship.frame]
+    let frameIdx = airship.frame
+    if (!images[frameIdx]) {
+      for (let d = 1; d < frameCount; d++) {
+        if (frameIdx - d >= 0 && images[frameIdx - d]) { frameIdx = frameIdx - d; break }
+        if (frameIdx + d < frameCount && images[frameIdx + d]) { frameIdx = frameIdx + d; break }
+      }
+    }
+    const img = images[frameIdx]
+    if (!img || !img.complete) return
     const canvasAspect = canvas.width  / canvas.height
     const imgAspect    = img.width     / img.height
     let drawWidth, drawHeight, offsetX, offsetY
@@ -114,14 +133,10 @@ function initInteractions() {
       offsetX    = 0
       offsetY    = (canvas.height - drawHeight) / 2
     } else {
-      const isMobile = getIsMobile()
-      // On mobile portrait, scale comfortably so the full robotic arm & camera head are framed
-      const scaleMultiplier = isMobile ? 0.90 : 1.0
-      drawHeight = canvas.height * scaleMultiplier
-      drawWidth  = drawHeight * imgAspect
+      drawHeight = canvas.height
+      drawWidth  = canvas.height * imgAspect
       offsetX    = (canvas.width  - drawWidth)  / 2
-      // On mobile portrait, position slightly lower so the top camera head clears the mobile navbar with breathing room
-      offsetY    = isMobile ? (canvas.height - drawHeight) * 0.65 : 0
+      offsetY    = 0
     }
 
     context.clearRect(0, 0, canvas.width, canvas.height)
