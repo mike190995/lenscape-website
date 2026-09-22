@@ -10,6 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
 import './mobile-nav.js'
 import { trackContactSubmit, trackChannelClick } from './telemetry.js'
+import { initCustomCursor } from './cursor.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -246,24 +247,8 @@ function initPage() {
   document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right')
     .forEach(el => observer.observe(el))
 
-  // --- Magnetic Cursor ---
-  const cursor = document.querySelector('.custom-cursor')
-  let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0
-
-  window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY })
-
-  gsap.ticker.add(() => {
-    cursorX += (mouseX - cursorX) * 0.15
-    cursorY += (mouseY - cursorY) * 0.15
-    gsap.set(cursor, { x: cursorX, y: cursorY })
-  })
-
-  document.querySelectorAll('.hover-target, a, button').forEach(el => {
-    el.addEventListener('mouseenter', () =>
-      gsap.to(cursor, { scale: 3, opacity: 0.5, duration: 0.3, ease: 'power2.out' }))
-    el.addEventListener('mouseleave', () =>
-      gsap.to(cursor, { scale: 1, opacity: 1,   duration: 0.3, ease: 'power2.out' }))
-  })
+  // --- Custom Cursor ---
+  initCustomCursor()
 
   // --- Info panel scroll reveal ---
   gsap.utils.toArray('.contact-info-block, .contact-map-block').forEach((block, i) => {

@@ -246,6 +246,10 @@ function createModalHTML(config = bookingConfig) {
                   <input type="radio" name="tier" value="360" id="tier-360" />
                   360 Booth
                 </label>
+                <label class="radio-item" id="tier-games-label">
+                  <input type="radio" name="tier" value="games" id="tier-games" />
+                  Interactive Games
+                </label>
                 <label class="radio-item" id="tier-glambot-label">
                   <input type="radio" name="tier" value="glambot" id="tier-glambot" />
                   GlamBot

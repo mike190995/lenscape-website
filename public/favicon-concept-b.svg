@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad-b" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141412" />
+      <stop offset="100%" stop-color="#070806" />
+    </linearGradient>
+    <filter id="core-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Tile -->
+  <rect width="512" height="512" rx="110" fill="url(#bg-grad-b)" />
+  <rect width="508" height="508" x="2" y="2" rx="108" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4" />
+
+  <!-- Outer Lens Ring -->
+  <circle cx="256" cy="256" r="185" fill="none" stroke="#27272A" stroke-width="12" />
+
+  <!-- 6-Blade Camera Aperture Iris -->
+  <g stroke="#090907" stroke-width="10" stroke-linejoin="round">
+    <path d="M 256 75 L 375 145 L 310 256 Z" fill="#E4E4E7" />
+    <path d="M 375 145 L 435 256 L 310 295 Z" fill="#D4D4D8" />
+    <path d="M 435 256 L 375 367 L 256 310 Z" fill="#A1A1AA" />
+    <path d="M 375 367 L 256 437 L 202 325 Z" fill="#E4E4E7" />
+    <path d="M 256 437 L 137 367 L 202 256 Z" fill="#D4D4D8" />
+    <path d="M 137 367 L 77 256 L 202 217 Z" fill="#A1A1AA" />
+  </g>
+
+  <!-- Center Aperture Sensor (Crimson Red Core) -->
+  <circle cx="256" cy="256" r="42" fill="#E31B23" filter="url(#core-glow)" />
+  <circle cx="256" cy="256" r="16" fill="#FFFFFF" opacity="0.8" />
+</svg>

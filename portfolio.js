@@ -13,6 +13,7 @@ import { PORTFOLIO_PROJECTS, PORTFOLIO_CATEGORIES, getPortfolioProjects } from '
 import './mobile-nav.js'
 import { resolveMediaUrl } from './media-config.js'
 import { trackPortfolioView } from './telemetry.js'
+import { initCustomCursor } from './cursor.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -604,29 +605,8 @@ function initPage() {
     onLeaveBack: () => navbar?.classList.remove('scrolled')
   })
 
-  // --- Magnetic Cursor ---
-  const cursor = document.querySelector('.custom-cursor')
-  let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0
-
-  window.addEventListener('mousemove', e => {
-    mouseX = e.clientX
-    mouseY = e.clientY
-  })
-
-  gsap.ticker.add(() => {
-    cursorX += (mouseX - cursorX) * 0.18
-    cursorY += (mouseY - cursorY) * 0.18
-    if (cursor) gsap.set(cursor, { x: cursorX, y: cursorY })
-  })
-
-  document.querySelectorAll('.hover-target, a, button, .portfolio-item').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      if (cursor) gsap.to(cursor, { scale: 2.8, opacity: 0.45, duration: 0.25, ease: 'power2.out' })
-    })
-    el.addEventListener('mouseleave', () => {
-      if (cursor) gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' })
-    })
-  })
+  // --- Custom Cursor ---
+  initCustomCursor()
 
   // --- Booking Modal ---
   initBookingModal()

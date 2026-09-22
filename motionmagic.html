@@ -3,7 +3,12 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#F3EC27" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MotionMagic Cam | High-Speed Robotic Video Booth Trinidad</title>
   <meta name="description"
@@ -273,132 +278,252 @@
         <div class="section-label">PHOTO &amp; VIDEO BOOTH FLEET</div>
         <h2 class="drama-text section-title">Choose Your<br>Booth.</h2>
       </div>
-      <p style="max-width:480px; color:var(--text-muted); font-size:1rem; line-height:1.85;">
-        From dynamic mobile roaming to physical keepsake prints, 360 slow-mo videos, and high-speed robotic arm choreography — explore our complete experiential lineup.
-      </p>
+      <div>
+        <p style="max-width:480px; color:var(--text-muted); font-size:1rem; line-height:1.85;">
+          From dynamic handheld roaming to physical keepsake prints, 360 slow-mo videos, interactive touchscreen games, and high-speed robotic arm cinema — explore our complete experiential fleet in Trinidad &amp; Tobago.
+        </p>
+        <div class="booth-carousel-header-nav">
+          <button type="button" class="carousel-nav-btn hover-target" id="booth-prev-btn" aria-label="Previous Booth">←</button>
+          <button type="button" class="carousel-nav-btn hover-target" id="booth-next-btn" aria-label="Next Booth">→</button>
+        </div>
+      </div>
     </div>
 
-    <div class="booth-grid">
+    <div class="booth-carousel-wrapper">
+      <div class="booth-carousel-track" id="booth-carousel-track">
 
-      <!-- Booth 1: Roamer -->
-      <div class="booth-card tier-roamer">
-        <div class="booth-badge-wrap">
-          <span class="booth-badge-pill badge-digital-red">DIGITAL</span>
+        <!-- Booth 1: Roamer -->
+        <div class="booth-card tier-roamer">
+          <div class="card-top-bar">
+            <span class="booth-badge-pill"><span class="badge-dot"></span>DIGITAL // ROAMING</span>
+            <div class="booth-color-toggle">
+              <span class="color-toggle-label">FINISH:</span>
+              <button type="button" class="color-swatch-btn active" data-target="roamer-kiosk-img" data-src="/booths/booth-roamer-black.webp">Black</button>
+              <button type="button" class="color-swatch-btn" data-target="roamer-kiosk-img" data-src="/booths/booth-roamer-white.webp">White</button>
+            </div>
+          </div>
+          
+          <div class="card-visual-hero">
+            <img src="/booths/booth-roamer-black.webp" id="roamer-kiosk-img" alt="Roamer Digital Booth" class="booth-product-img" loading="lazy" />
+          </div>
+
+          <div class="card-header-group">
+            <h3 class="booth-card-title">Roamer</h3>
+            <p class="booth-card-desc">Dynamic handheld &amp; stationary social capture that moves with your crowd anywhere in the venue.</p>
+          </div>
+
+          <div class="card-price-hero">
+            <div class="price-hero-label">STARTING AT</div>
+            <div class="price-hero-amount">TTD $1,800</div>
+            <div class="price-rates-compact">
+              <span>2h: <strong>$1,800</strong></span>
+              <span>•</span>
+              <span>3h: <strong>$2,100</strong></span>
+              <span>•</span>
+              <span>4h: <strong>$2,250</strong></span>
+              <span>•</span>
+              <span>5h: <strong>$2,600</strong></span>
+            </div>
+          </div>
+
+          <ul class="card-inclusions-list">
+            <li><strong>Roamer Photobooth &amp; Dedicated Operator</strong></li>
+            <li><strong>Unlimited Photos, GIFs &amp; Boomerangs</strong></li>
+            <li><strong>Instant Digital Sharing</strong> (AirDrop, QR, SMS)</li>
+            <li><strong>Custom Branded Overlay &amp; Live Gallery</strong></li>
+            <li><strong>Transport Included</strong></li>
+          </ul>
+
+          <div class="booth-action-wrap">
+            <button class="btn-ghost book-now-btn hover-target" data-booth="roamer">BOOK ROAMER →</button>
+          </div>
         </div>
-        <h3 class="booth-card-title">Roamer</h3>
-        <div class="booth-divider"></div>
-        <ul class="booth-features">
-          <li>Booth &amp; Operator</li>
-          <li>Digital sharing (AirDrop, QR, SMS, Email)</li>
-          <li>Photos &amp; Boomerangs</li>
-          <li>Custom branded overlay</li>
-          <li>Stationary &amp; Roaming modes</li>
-          <li>Online live gallery</li>
-          <li>Transport included</li>
-        </ul>
-        <div class="booth-rates-table">
-          <div>2h: <span>TTD $1,800</span> &nbsp;|&nbsp; 3h: <span>TTD $2,100</span></div>
-          <div>4h: <span>TTD $2,250</span> &nbsp;|&nbsp; 5h: <span>TTD $2,600</span></div>
+
+        <!-- Booth 2: Print Booth -->
+        <div class="booth-card tier-print">
+          <div class="card-top-bar">
+            <span class="booth-badge-pill"><span class="badge-dot"></span>PRINTS + DIGITAL</span>
+          </div>
+
+          <div class="card-visual-hero">
+            <img src="/booths/booth-print-hd.webp" alt="Print Photo Booth" class="booth-product-img" loading="lazy" />
+          </div>
+
+          <div class="card-header-group">
+            <h3 class="booth-card-title">Print Booth</h3>
+            <p class="booth-card-desc">Flagship studio-grade flash kiosk delivering physical keepsake lab prints and first-party lead capture.</p>
+          </div>
+
+          <div class="card-price-hero">
+            <div class="price-hero-label">STARTING AT</div>
+            <div class="price-hero-amount">TTD $3,300</div>
+            <div class="price-rates-compact">
+              <span>2h: <strong>$3,300</strong></span>
+              <span>•</span>
+              <span>3h: <strong>$3,750</strong></span>
+              <span>•</span>
+              <span>4h: <strong>$4,250</strong></span>
+              <span>•</span>
+              <span>5h: <strong>$4,600</strong></span>
+            </div>
+          </div>
+
+          <ul class="card-inclusions-list">
+            <li><strong>Print Kiosk + Dedicated Professional Operator</strong></li>
+            <li><strong>Unlimited High-Speed Physical Lab Prints</strong></li>
+            <li><strong>Full Digital Experience</strong> + Instant AirDrop &amp; QR</li>
+            <li><strong>Custom Print Borders &amp; Studio Lighting Rig</strong></li>
+            <li><strong>Party Props &amp; Transport Included</strong></li>
+          </ul>
+
+          <div class="booth-action-wrap">
+            <button class="btn-ghost book-now-btn hover-target" data-booth="print">BOOK PRINT BOOTH →</button>
+          </div>
         </div>
-        <div class="booth-image-wrap">
-          <img src="/booths/booth-roamer.webp" alt="Roamer Digital Booth" class="booth-product-img" loading="lazy" />
+
+        <!-- Booth 3: 360 Booth -->
+        <div class="booth-card tier-360">
+          <div class="card-top-bar">
+            <span class="booth-badge-pill"><span class="badge-dot"></span>SLOW-MO 360</span>
+          </div>
+
+          <div class="card-visual-hero">
+            <img src="/booths/booth-360.webp" alt="360 Video Booth" class="booth-product-img" loading="lazy" />
+          </div>
+
+          <div class="card-header-group">
+            <h3 class="booth-card-title">360 Booth</h3>
+            <p class="booth-card-desc">High-energy spinning platform capturing dynamic 360° slow-motion video with curated audio and lighting.</p>
+          </div>
+
+          <div class="card-price-hero">
+            <div class="price-hero-label">STARTING AT</div>
+            <div class="price-hero-amount">TTD $1,800</div>
+            <div class="price-rates-compact">
+              <span>2h: <strong>$1,800</strong></span>
+              <span>•</span>
+              <span>3h: <strong>$2,100</strong></span>
+              <span>•</span>
+              <span>4h: <strong>$2,250</strong></span>
+              <span>•</span>
+              <span>5h: <strong>$2,600</strong></span>
+            </div>
+          </div>
+
+          <ul class="card-inclusions-list">
+            <li><strong>360 Platform Booth &amp; Dedicated Operator</strong></li>
+            <li><strong>Unlimited 360° Slow-Motion Video Sessions</strong></li>
+            <li><strong>Custom Animated Video Overlay &amp; Audio Track</strong></li>
+            <li><strong>Studio RGB Ring Lighting Rig &amp; Event Props</strong></li>
+            <li><strong>Instant Sharing &amp; Transport Included</strong></li>
+          </ul>
+
+          <div class="booth-action-wrap">
+            <button class="btn-ghost book-now-btn hover-target" data-booth="360">BOOK 360 →</button>
+          </div>
         </div>
-        <div class="booth-action-wrap">
-          <button class="btn-ghost book-now-btn hover-target" data-booth="roamer">BOOK ROAMER →</button>
+
+        <!-- Booth 4: Custom Interactive Games -->
+        <div class="booth-card tier-games">
+          <div class="card-top-bar">
+            <span class="booth-badge-pill"><span class="badge-dot"></span>TOUCHSCREEN // GAMES</span>
+          </div>
+
+          <div class="card-visual-hero">
+            <img src="/booths/booth-games-hd.webp" alt="Custom Interactive Games" class="booth-product-img" loading="lazy" />
+          </div>
+
+          <div class="card-header-group">
+            <h3 class="booth-card-title">Interactive Games</h3>
+            <p class="booth-card-desc">Turnkey vertical touchscreen gaming kiosk with Match 2, Spin The Wheel, Puzzle Build, and Trivia.</p>
+          </div>
+
+          <div class="card-price-hero">
+            <div class="price-hero-label">BESPOKE ACTIVATION</div>
+            <div class="price-hero-amount">FROM TTD $8,000</div>
+            <div class="price-rates-compact">
+              <span>Ready-To-Customize</span>
+              <span>•</span>
+              <span>New Game Dev</span>
+              <span>•</span>
+              <span>Turnkey Hardware</span>
+            </div>
+          </div>
+
+          <ul class="card-inclusions-list">
+            <li><strong>Vertical Touchscreen Kiosk Hardware Activation</strong></li>
+            <li><strong>Match 2, Spin The Wheel, Trivia &amp; Puzzle Build</strong></li>
+            <li><strong>Branded Campaigns &amp; Instant Giveaways</strong></li>
+            <li><strong>First-Party Lead Capture &amp; Live Data Analytics</strong></li>
+            <li><strong>Turnkey Setup + Dedicated Event Operator</strong></li>
+          </ul>
+
+          <div class="booth-action-wrap">
+            <button class="btn-ghost book-now-btn hover-target" data-booth="games">EXPLORE GAMES →</button>
+          </div>
         </div>
+
+        <!-- Booth 5: GlamBot -->
+        <div class="booth-card tier-glambot">
+          <div class="card-top-bar">
+            <span class="booth-badge-pill"><span class="badge-dot"></span>FLAGSHIP // ROBOTIC CINEMA</span>
+          </div>
+
+          <div class="card-visual-hero">
+            <img src="/booths/booth-glambot-hd.webp" alt="GlamBot Robotic Arm Cam" class="booth-product-img" loading="lazy" />
+          </div>
+
+          <div class="card-header-group">
+            <h3 class="booth-card-title">GlamBot</h3>
+            <p class="booth-card-desc">Hollywood-grade 6-axis robotic arm executing precision high-speed 120fps cinema slow-motion video.</p>
+          </div>
+
+          <div class="card-price-hero">
+            <div class="price-hero-label">STARTING AT</div>
+            <div class="price-hero-amount">TTD $3,500</div>
+            <div class="price-rates-compact">
+              <span>2h: <strong>$3,500</strong></span>
+              <span>•</span>
+              <span>3h: <strong>$4,000</strong></span>
+              <span>•</span>
+              <span>4h: <strong>$4,500</strong></span>
+              <span>•</span>
+              <span>5h: <strong>$5,000</strong></span>
+            </div>
+          </div>
+
+          <ul class="card-inclusions-list">
+            <li><strong>6-Axis High-Speed Robotic Arm Cam System</strong></li>
+            <li><strong>(2) Dedicated Professional Robotic Operators</strong></li>
+            <li><strong>Unlimited 120fps Cinema Slow-Motion Videos</strong></li>
+            <li><strong>Custom Video Overlay, Color Grade &amp; Motion Paths</strong></li>
+            <li><strong>Studio Lighting, Crowd Stanchions &amp; Transport</strong></li>
+          </ul>
+
+          <div class="booth-action-wrap">
+            <button class="btn-primary book-now-btn hover-target" data-booth="glambot"><span>BOOK GLAMBOT →</span></button>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Booth 2: Print Booth -->
-      <div class="booth-card tier-print">
-        <div class="booth-badge-wrap">
-          <span class="booth-badge-pill badge-prints-blue">PRINTS</span>
+      <div class="carousel-footer-bar">
+        <div class="carousel-pagination" id="booth-carousel-pagination">
+          <button type="button" class="carousel-dot active" data-index="0" aria-label="Go to slide 1"></button>
+          <button type="button" class="carousel-dot" data-index="1" aria-label="Go to slide 2"></button>
+          <button type="button" class="carousel-dot" data-index="2" aria-label="Go to slide 3"></button>
+          <button type="button" class="carousel-dot" data-index="3" aria-label="Go to slide 4"></button>
+          <button type="button" class="carousel-dot" data-index="4" aria-label="Go to slide 5"></button>
         </div>
-        <h3 class="booth-card-title">Print Booth</h3>
-        <div class="booth-divider"></div>
-        <ul class="booth-features">
-          <li>Booth &amp; Operator</li>
-          <li>Digital sharing</li>
-          <li>Unlimited physical prints</li>
-          <li>Custom branded print overlay</li>
-          <li>Fun party props included</li>
-          <li>Professional lighting rig</li>
-          <li>Backdrop &amp; Transport included</li>
-        </ul>
-        <div class="booth-rates-table">
-          <div>2h: <span>TTD $3,300</span> &nbsp;|&nbsp; 3h: <span>TTD $3,750</span></div>
-          <div>4h: <span>TTD $4,250</span> &nbsp;|&nbsp; 5h: <span>TTD $4,600</span></div>
-        </div>
-        <div class="booth-image-wrap">
-          <img src="/booths/booth-print.webp" alt="Print Photo Booth" class="booth-product-img" loading="lazy" />
-        </div>
-        <div class="booth-action-wrap">
-          <button class="btn-ghost book-now-btn hover-target" data-booth="print">BOOK PRINT BOOTH →</button>
-        </div>
+        <div class="carousel-hint">DRAG OR SWIPE // 05 PLATFORMS</div>
       </div>
-
-      <!-- Booth 3: 360 Booth -->
-      <div class="booth-card tier-360">
-        <div class="booth-badge-wrap">
-          <span class="booth-badge-pill badge-digital-gold">DIGITAL</span>
-        </div>
-        <h3 class="booth-card-title">360</h3>
-        <div class="booth-divider"></div>
-        <ul class="booth-features">
-          <li>Platform Booth &amp; Operator</li>
-          <li>Instant digital video sharing</li>
-          <li>Unlimited 360° video sessions</li>
-          <li>Custom animated overlay &amp; audio</li>
-          <li>360 lighting ring kit</li>
-          <li>Props pack included</li>
-          <li>Online live gallery &amp; Transport included</li>
-        </ul>
-        <div class="booth-rates-table">
-          <div>2h: <span>TTD $1,800</span> &nbsp;|&nbsp; 3h: <span>TTD $2,100</span></div>
-          <div>4h: <span>TTD $2,250</span> &nbsp;|&nbsp; 5h: <span>TTD $2,600</span></div>
-        </div>
-        <div class="booth-image-wrap">
-          <img src="/booths/booth-360.webp" alt="360 Video Booth" class="booth-product-img" loading="lazy" />
-        </div>
-        <div class="booth-action-wrap">
-          <button class="btn-ghost book-now-btn hover-target" data-booth="360">BOOK 360 →</button>
-        </div>
-      </div>
-
-      <!-- Booth 4: GlamBot -->
-      <div class="booth-card tier-glambot">
-        <div class="booth-badge-wrap">
-          <span class="booth-badge-pill badge-digital-cyan">DIGITAL</span>
-        </div>
-        <h3 class="booth-card-title">GlamBot</h3>
-        <div class="booth-divider"></div>
-        <ul class="booth-features">
-          <li>Robotic arm motion control booth</li>
-          <li>(3) High-speed arm pathway presets</li>
-          <li>(2) Professional dedicated operators</li>
-          <li>Instant digital sharing</li>
-          <li>Props (if required)</li>
-          <li>2–4 Studio light fill setup</li>
-          <li>Unlimited high-speed videos &amp; custom overlay</li>
-        </ul>
-        <div class="booth-rates-table">
-          <div>2h: <span>TTD $3,500</span> &nbsp;|&nbsp; 3h: <span>TTD $4,000</span></div>
-          <div>4h: <span>TTD $4,500</span> &nbsp;|&nbsp; 5h: <span>TTD $5,000</span></div>
-        </div>
-        <div class="booth-image-wrap">
-          <img src="/booths/booth-glambot.webp" alt="GlamBot Robotic Arm Cam" class="booth-product-img" loading="lazy" />
-        </div>
-        <div class="booth-action-wrap">
-          <button class="btn-primary book-now-btn hover-target" data-booth="glambot"><span>BOOK GLAMBOT →</span></button>
-        </div>
-      </div>
-
     </div>
 
     <!-- Bespoke / Custom Production Banner -->
-    <div class="booth-custom-strip reveal-up" style="margin-top:2.5rem; padding:2rem 2.5rem; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+    <div class="booth-custom-strip">
       <div>
         <div class="section-label" style="color:var(--accent); font-size:0.62rem; letter-spacing:0.18em;">BESPOKE BRAND ACTIVATIONS</div>
-        <h3 class="drama-text" style="font-size:1.45rem; margin:0.35rem 0; color:#fff;">Need Custom Arm Choreography or Multi-Day Activations?</h3>
+        <h3 class="drama-text" style="font-size:1.35rem; margin:0.35rem 0; color:#fff;">Need Custom Arm Choreography or Multi-Day Activations?</h3>
         <p style="color:var(--text-muted); font-size:0.86rem; margin:0; max-width:65ch; line-height:1.6;">We program custom robotic pathways, branded scenic backdrops, and synchronized multi-light rigs for major festivals, brand launches, and broadcast productions.</p>
       </div>
       <button class="btn-ghost book-now-btn hover-target" data-booth="custom" style="white-space:nowrap;">REQUEST CUSTOM QUOTE →</button>

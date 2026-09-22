@@ -5,7 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/optimize-portfolio-images.cjs",
     "build": "vite build",
+    "optimize:images": "node scripts/optimize-portfolio-images.cjs",
+    "optimize:videos": "node scripts/transcode-hls-media.cjs",
+    "optimize:media": "node scripts/optimize-portfolio-images.cjs && node scripts/transcode-hls-media.cjs",
+    "deploy": "powershell -ExecutionPolicy Bypass -File scripts/deploy-all.ps1",
+    "deploy:bash": "bash scripts/deploy-all.sh",
     "preview": "vite preview"
   },
   "devDependencies": {

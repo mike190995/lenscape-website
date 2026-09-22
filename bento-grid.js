@@ -218,28 +218,28 @@ const SERVICE_MODAL_DATA = {
         label: '⚡ GLAMBOT 01',
         src: '/Portfolio/Our Work/Videos/MMC videos/Ex_1.mp4',
         poster: '/Portfolio/thumbnails/Videos/MMC%20videos/Ex_1.webp',
-        pos: 'center 16%'
+        pos: 'center 30%'
       },
       {
         type: 'video',
         label: '⚡ GLAMBOT 02',
         src: '/Portfolio/Our Work/Videos/MMC videos/Ex 5.mp4',
         poster: '/Portfolio/thumbnails/Videos/MMC%20videos/Ex%205.webp',
-        pos: 'center 28%'
+        pos: 'center 50%'
       },
       {
         type: 'video',
         label: '⚡ GLAMBOT 03',
         src: '/Portfolio/Our Work/Videos/MMC videos/Ex 6.mp4',
         poster: '/Portfolio/thumbnails/Videos/MMC%20videos/Ex%206.webp',
-        pos: 'center 28%'
+        pos: 'center 58%'
       },
       {
         type: 'video',
         label: '🌀 360 BOOTH',
         src: '/Portfolio/Our Work/Videos/360 videos/001be6de-ed6e-4332-ba73-a2893c873e55.mp4',
         poster: '/Portfolio/thumbnails/Videos/360%20videos/001be6de-ed6e-4332-ba73-a2893c873e55.webp',
-        pos: 'center 20%'
+        pos: 'center 40%'
       }
     ]
   }
@@ -269,7 +269,7 @@ function switchOverlayMedia(item, itemIndex, tabsContainer) {
     if (img) img.style.display = 'none';
     if (video) {
       video.style.display = 'block';
-      video.style.objectPosition = item.pos || 'center 18%';
+      video.style.objectPosition = item.pos || 'center 40%';
       video.poster = resolveMediaUrl(item.poster) || '';
       
       const resolvedSrc = resolveMediaUrl(item.src);
@@ -294,7 +294,7 @@ function switchOverlayMedia(item, itemIndex, tabsContainer) {
     }
     if (img) {
       img.style.display = 'block';
-      img.style.objectPosition = item.pos || 'center 18%';
+      img.style.objectPosition = item.pos || 'center 40%';
       img.src = item.src;
       img.alt = item.label;
     }

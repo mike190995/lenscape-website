@@ -10,6 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initBookingModal } from './booking.js'
 import './mobile-nav.js'
 import './telemetry.js'
+import { initCustomCursor } from './cursor.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -166,24 +167,24 @@ function initInteractions() {
 
   heroTl.to('.hero-sticky', { y: '-15%', scale: 0.9, opacity: 0.5, duration: 1, ease: 'none' }, 5)
 
-  // --- Booth Cards Scroll Reveal ---
-  gsap.utils.toArray('.booth-card').forEach((card, i) => {
-    gsap.fromTo(card,
-      { y: 80, opacity: 0 },
+  // --- Booth Carousel Reveal ---
+  const carouselWrapper = document.querySelector('.booth-carousel-wrapper')
+  if (carouselWrapper) {
+    gsap.fromTo(carouselWrapper,
+      { y: 50, opacity: 0 },
       {
         scrollTrigger: {
-          trigger: card,
-          start:   'top 88%',
-          end:     'top 60%',
+          trigger: '.booth-section',
+          start:   'top 85%',
+          end:     'top 55%',
           scrub:   1
         },
         y:       0,
         opacity: 1,
-        ease:    'power2.out',
-        delay:   i * 0.05
+        ease:    'power2.out'
       }
     )
-  })
+  }
 
   // --- Booth CTA Reveal ---
   gsap.from('.booth-cta h3', {
@@ -197,25 +198,8 @@ function initInteractions() {
     opacity: 0
   })
 
-  // --- Magnetic Cursor ---
-  const cursor = document.querySelector('.custom-cursor')
-  let mouseX = 0, mouseY = 0
-  let cursorX = 0, cursorY = 0
-
-  window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY })
-
-  gsap.ticker.add(() => {
-    cursorX += (mouseX - cursorX) * 0.15
-    cursorY += (mouseY - cursorY) * 0.15
-    gsap.set(cursor, { x: cursorX, y: cursorY })
-  })
-
-  document.querySelectorAll('.hover-target, a, button').forEach(el => {
-    el.addEventListener('mouseenter', () =>
-      gsap.to(cursor, { scale: 3, opacity: 0.5, duration: 0.3, ease: 'power2.out' }))
-    el.addEventListener('mouseleave', () =>
-      gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.3, ease: 'power2.out' }))
-  })
+  // --- Custom Cursor ---
+  initCustomCursor()
 
   // --- Navbar Scroll Style ---
   const navbar = document.querySelector('.navbar')
@@ -271,6 +255,197 @@ function initInteractions() {
         ease: 'power2.out'
       }
     )
+  })
+
+  // --- Booth Carousel Controller ---
+  const track = document.getElementById('booth-carousel-track')
+  const prevBtn = document.getElementById('booth-prev-btn')
+  const nextBtn = document.getElementById('booth-next-btn')
+  const paginationContainer = document.getElementById('booth-carousel-pagination')
+
+  if (track) {
+    const cards = track.querySelectorAll('.booth-card')
+    const dots = paginationContainer ? paginationContainer.querySelectorAll('.carousel-dot') : []
+
+    const getScrollStep = () => {
+      const firstCard = track.querySelector('.booth-card')
+      return firstCard ? firstCard.offsetWidth + 28 : 360
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -getScrollStep(), behavior: 'smooth' })
+      })
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: getScrollStep(), behavior: 'smooth' })
+      })
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        if (cards[idx]) {
+          cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
+        }
+      })
+    })
+
+    // --- Desktop Cursor Drag-to-Scroll & Swipe Controller ---
+    let isDown = false
+    let startX = 0
+    let scrollStart = 0
+    let dragged = false
+    let lastX = 0
+    let lastTime = 0
+    let velX = 0
+
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      isDown = true
+      dragged = false
+      startX = e.clientX
+      scrollStart = track.scrollLeft
+      lastX = e.clientX
+      lastTime = Date.now()
+      velX = 0
+
+      track.classList.add('is-dragging')
+      try {
+        track.setPointerCapture(e.pointerId)
+      } catch (_) {}
+    })
+
+    track.addEventListener('pointermove', (e) => {
+      if (!isDown) return
+      const dx = e.clientX - startX
+      if (Math.abs(dx) > 4) {
+        dragged = true
+      }
+
+      const now = Date.now()
+      const dt = now - lastTime
+      if (dt > 0) {
+        velX = (e.clientX - lastX) / dt
+      }
+      lastX = e.clientX
+      lastTime = now
+
+      track.scrollLeft = scrollStart - dx
+    })
+
+    const endDrag = (e) => {
+      if (!isDown) return
+      isDown = false
+      track.classList.remove('is-dragging')
+      try {
+        track.releasePointerCapture(e.pointerId)
+      } catch (_) {}
+
+      // Flick inertia
+      if (dragged && Math.abs(velX) > 0.25) {
+        track.scrollBy({ left: -velX * 240, behavior: 'smooth' })
+      }
+
+      // Suppress accidental click if user was dragging
+      if (dragged) {
+        const suppressClick = (ev) => {
+          ev.preventDefault()
+          ev.stopPropagation()
+          track.removeEventListener('click', suppressClick, true)
+        }
+        track.addEventListener('click', suppressClick, true)
+      }
+    }
+
+    track.addEventListener('pointerup', endDrag)
+    track.addEventListener('pointercancel', endDrag)
+
+    // Sync active pagination dot on scroll
+    let isScrolling
+    track.addEventListener('scroll', () => {
+      window.clearTimeout(isScrolling)
+      isScrolling = setTimeout(() => {
+        const scrollLeft = track.scrollLeft
+        let activeIdx = 0
+        let minDiff = Infinity
+
+        cards.forEach((card, idx) => {
+          const diff = Math.abs(card.offsetLeft - track.offsetLeft - scrollLeft)
+          if (diff < minDiff) {
+            minDiff = diff
+            activeIdx = idx
+          }
+        })
+
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === activeIdx)
+        })
+      }, 40)
+    }, { passive: true })
+  }
+
+  // --- Fleet Currency Switcher (Event Labs) ---
+  const currencyBtns = document.querySelectorAll('.currency-toggle-btn')
+  currencyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedCurrency = btn.getAttribute('data-currency') // 'GYD' or 'USD'
+      currencyBtns.forEach(b => b.classList.toggle('active', b === btn))
+
+      // Update hero rate amounts
+      document.querySelectorAll('.rate-display-hero').forEach(el => {
+        const gyd = el.getAttribute('data-gyd')
+        const usd = el.getAttribute('data-usd')
+        if (gyd && usd) {
+          const prim = el.querySelector('.rate-primary')
+          const sec = el.querySelector('.rate-secondary')
+          if (selectedCurrency === 'USD') {
+            if (prim) prim.textContent = usd
+            if (sec) sec.textContent = `| ${gyd}`
+          } else {
+            if (prim) prim.textContent = gyd
+            if (sec) sec.textContent = `| ${usd}`
+          }
+        }
+      })
+
+      // Update compact rate values
+      document.querySelectorAll('.rate-compact-val').forEach(el => {
+        const gyd = el.getAttribute('data-gyd')
+        const usd = el.getAttribute('data-usd')
+        if (gyd && usd) {
+          el.textContent = selectedCurrency === 'USD' ? usd : gyd
+        }
+      })
+    })
+  })
+
+  // --- Booth Finish Switcher (Roamer Black/White) ---
+  document.querySelectorAll('.color-swatch-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('.booth-color-toggle')
+      if (parent) {
+        parent.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'))
+        btn.classList.add('active')
+      }
+      const targetId = btn.getAttribute('data-target')
+      const targetImg = document.getElementById(targetId)
+      const newSrc = btn.getAttribute('data-src')
+      if (targetImg && newSrc) {
+        gsap.to(targetImg, {
+          opacity: 0,
+          scale: 0.96,
+          duration: 0.15,
+          onComplete: () => {
+            targetImg.src = newSrc
+            targetImg.onload = () => {
+              gsap.to(targetImg, { opacity: 1, scale: 1, duration: 0.25, ease: 'power2.out' })
+            }
+          }
+        })
+      }
+    })
   })
 
   // --- Booking Modal ---

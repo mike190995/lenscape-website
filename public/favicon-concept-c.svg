@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad-c" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141412" />
+      <stop offset="100%" stop-color="#080907" />
+    </linearGradient>
+    <filter id="rec-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Tile -->
+  <rect width="512" height="512" rx="110" fill="url(#bg-grad-c)" />
+  <rect width="508" height="508" x="2" y="2" rx="108" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4" />
+
+  <!-- Live Recording Indicator Dot -->
+  <circle cx="395" cy="115" r="26" fill="#E31B23" filter="url(#rec-glow)" />
+
+  <!-- Bold Brutalist Wordmark "L" -->
+  <path d="M 125 105 L 225 105 L 225 315 L 385 315 L 385 405 L 125 405 Z" fill="#FFFFFF" />
+</svg>

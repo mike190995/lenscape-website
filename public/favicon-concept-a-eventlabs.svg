@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <filter id="rec-glow-el" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.25)" />
+    </filter>
+  </defs>
+
+  <!-- Background Squircle Tile (Event Labs Brand Off-Yellow / Citron Lime) -->
+  <rect width="512" height="512" rx="112" fill="#CFDC3B" />
+  <rect width="506" height="506" x="3" y="3" rx="109" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="6" />
+
+  <!-- Camera Viewfinder Reticle Brackets (Obsidian Black) -->
+  <path d="M 84 148 L 84 84 L 148 84" fill="none" stroke="#090A08" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 428 364 L 428 428 L 364 428" fill="none" stroke="#090A08" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Recording / Telemetry Dot (Event Labs Electric Cyan with Shadow) -->
+  <circle cx="410" cy="102" r="26" fill="#008EA8" filter="url(#rec-glow-el)" />
+
+  <!-- Monogram L (Obsidian Black) -->
+  <path d="M 148 136 L 228 136 L 228 300 L 364 300 L 364 376 L 148 376 Z" fill="#090A08" />
+</svg>

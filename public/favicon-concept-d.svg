@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad-d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141412" />
+      <stop offset="100%" stop-color="#080907" />
+    </linearGradient>
+    <linearGradient id="flare-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E31B23" stop-opacity="0" />
+      <stop offset="35%" stop-color="#E31B23" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="65%" stop-color="#36B1D3" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#36B1D3" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Tile -->
+  <rect width="512" height="512" rx="110" fill="url(#bg-grad-d)" />
+  <rect width="508" height="508" x="2" y="2" rx="108" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4" />
+
+  <!-- Concentric Optical Elements -->
+  <circle cx="256" cy="256" r="165" fill="none" stroke="#27272A" stroke-width="8" />
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#3F3F46" stroke-width="6" stroke-dasharray="8 6" />
+  <circle cx="256" cy="256" r="75" fill="#18181B" stroke="#E4E4E7" stroke-width="10" />
+
+  <!-- Horizontal Anamorphic Flare Streak -->
+  <rect x="36" y="246" width="440" height="20" rx="10" fill="url(#flare-grad)" />
+
+  <!-- Central Optical Core -->
+  <circle cx="256" cy="256" r="26" fill="#FFFFFF" />
+</svg>
